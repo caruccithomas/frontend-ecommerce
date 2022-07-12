@@ -5,44 +5,93 @@ import Footer from '../components/Footer'
 import SVGImage from '../components/registers/register_02.svg'
 
 const Container = styled.div`
+    display: flex;
     width: 100%;
     height: 100vh;
     background: linear-gradient( rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3) ), url('images/logins/background_02.jpg') center;
     background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 20px;
-    padding: 0 80px;
+    padding: 40px 80px;
 
-    @media only screen and (max-width: 1080px) {
+    @media screen and (max-width: 1280px) {
         transition: all 0.5s ease-in-out;
-        padding: 0 20px;
-    }
-
-    @media screen and (max-width: 820px) {
+        padding: 20px 40px;
         flex-direction: column;
         height: 100%;
         row-gap: 20px;
-        padding: 20px;
     }
 `
 
 const LeftWrapper = styled.div`
     flex: 1;
+    flex-direction: column;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 100%;
+`
 
+const NavLogo = styled(LinkRouter)`
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+    font-weight: 900;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+        color: #01BF71;
+    }
+
+    @media only screen and (max-width: 1080px) {
+        transition: all 0.5s ease-in-out;
+        font-size: 1.8em;
+    }
+
+    @media screen and (max-width: 380px) {
+        transition: all 0.5s ease-in-out;
+        font-size: 1.4em;
+    }
+`
+
+const LogoText = styled.h2`
+    font-weight: 200;
+    font-size: 1em;
+    margin-left: 6px;
+    letter-spacing: -1px;
+`
+
+const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
     padding: 40px 30px;
     background-color: white;
     box-shadow: 1px 1px 8px 1px lightgrey;
     opacity: 0.9;
 
-    @media only screen and (max-width: 1080px) {
+    @media only screen and (max-width: 1280px) {
         transition: all 0.5s ease-in-out;
-        height: 90%;
+
+    }
+`
+
+const Form = styled.form`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    @media only screen and (max-width: 180px) {
+        transition: all 0.5s ease-in-out;
+        flex-direction: column;
+        width: 100%;
     }
 `
 
@@ -54,19 +103,6 @@ const Title = styled.h1`
     letter-spacing: 1px;
     margin-bottom: 30px;
     text-align: center;
-`
-
-const Form = styled.form`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-
-    @media only screen and (max-width: 1080px) {
-        transition: all 0.5s ease-in-out;
-        flex-direction: column;
-        width: 100%;
-    }
 `
 
 const Text = styled.h2`
@@ -131,73 +167,11 @@ const Button = styled.button`
     }
 `
 
-const RightWrapper = styled.div`
-    flex: 1;
-    flex-direction: column;
+const LoginWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    box-sizing: border-box;
-
-    @media only screen and (max-width: 1080px) {
-        transition: all 0.5s ease-in-out;
-        height: 90%;
-    }
-`
-
-const NavLogo = styled(LinkRouter)`
-    color: #000;
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    font-size: 2em;
-    font-weight: 900;
-    font-family: 'Lato', sans-serif;
-    letter-spacing: 1px;
-    cursor: pointer;
-    text-decoration: none;
-
-    &:hover {
-        color: #01BF71;
-    }
-
-    @media only screen and (max-width: 1080px) {
-        transition: all 0.5s ease-in-out;
-        font-size: 1.8em;
-    }
-
-    @media screen and (max-width: 380px) {
-        transition: all 0.5s ease-in-out;
-        font-size: 1.4em;
-    }
-`
-
-const LogoText = styled.h2`
-    font-weight: 200;
-    font-size: 1em;
-    margin-left: 6px;
-    letter-spacing: -1px;
-`
-
-const Image = styled.img`
-    width: 100%;
-    max-height: 80vh;
-    object-fit: fill;
-    padding: 10px 0;
-
-    @media only screen and (max-width: 820px) {
-        transition: all 0.5s ease-in-out;
-        padding: 20px 0;
-    }
-`
-
-const LoginWrapper = styled.div`
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    // width: 100%;
     background: white;
     border-radius: 50px;
     box-shadow: 1px 1px 8px 1px lightgrey;
@@ -243,6 +217,30 @@ const Link = styled.a`
     }
 `
 
+const RightWrapper = styled.div`
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+
+    @media only screen and (max-width: 1080px) {
+        transition: all 0.5s ease-in-out;
+        height: 90%;
+    }
+`
+
+const Image = styled.img`
+    width: 0%;
+    object-fit: contain;
+
+    @media only screen and (max-width: 1280px) {
+        transition: all 0.5s ease-in-out;
+        padding: 20px 0;
+        width: 60%;
+    }
+`
+
 // Register
 
 const Register = () => {
@@ -250,32 +248,34 @@ const Register = () => {
         <Fragment>
             <Container>
                 <LeftWrapper>
-                    <Form>
-                        <Title>Crear una cuenta en BRONX</Title>
-                        <Text>Registrate y recibe las mejores marcas en tu casa desde cualquier parte del País</Text>
-                        <Input placeholder="nombre" />
-                        <Input placeholder="apellido" />
-                        <Input placeholder="nombre de usuario" />
-                        <Input placeholder="correo electrónico" />
-                        <Input placeholder="contraseña" />
-                        <Input placeholder="confirmar contraseña" />
-                        <Agreement>
-                            Al crear una cuenta, doy mi consentimiento para el 
-                            procesamiento de mis datos personales de acuerdo 
-                            con la <b>Política de Privacidad</b>
-                        </Agreement>
-                        <Button>REGISTRARSE</Button>
-                    </Form>
-                </LeftWrapper>
-                <RightWrapper>
                     <NavLogo to='/'> BRONX
                         <LogoText>boutique</LogoText>
                     </NavLogo>
+                    <Wrapper>
+                        <Form>
+                            <Title>Crear una cuenta en BRONX</Title>
+                            <Text>Registrate y recibe las mejores marcas en tu casa desde cualquier parte del País</Text>
+                            <Input placeholder="nombre" />
+                            <Input placeholder="apellido" />
+                            <Input placeholder="nombre de usuario" />
+                            <Input placeholder="correo electrónico" />
+                            <Input placeholder="contraseña" />
+                            <Input placeholder="confirmar contraseña" />
+                            <Agreement>
+                                Al crear una cuenta, doy mi consentimiento para el 
+                                procesamiento de mis datos personales de acuerdo 
+                                con la <b>Política de Privacidad</b>
+                            </Agreement>
+                            <Button>REGISTRARSE</Button>
+                            <LoginWrapper>
+                                <Info>¿Ya tienes una cuenta?</Info>
+                                <Link>Iniciar Sesión</Link>
+                            </LoginWrapper>
+                        </Form>
+                    </Wrapper>
+                </LeftWrapper>
+                <RightWrapper>
                     <Image src={SVGImage} />
-                    <LoginWrapper>
-                        <Info>¿Ya tienes una cuenta?</Info>
-                        <Link>INICIA SESIÓN</Link>
-                    </LoginWrapper>
                 </RightWrapper>
             </Container>
             <Footer />
