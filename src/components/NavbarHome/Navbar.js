@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link as LinkRouter } from 'react-router-dom'
 import { Link as LinkScroll } from 'react-scroll'
+import { animateScroll as scroll } from 'react-scroll'
 import { Search, ShoppingCart } from '@material-ui/icons'
 import { Badge } from '@material-ui/core'
 import Hamburger from 'hamburger-react'
@@ -135,7 +136,10 @@ const Link = styled(LinkScroll)`
     cursor: pointer;
 
     &.active {
-        border-bottom: 3px solid white;
+        border-bottom: 3px solid #01bf71;
+        color: #01bf71;
+        font-weight: 800;
+        text-shadow: 1px 1px 4px lightgrey;
     }
 `
 
@@ -235,6 +239,10 @@ const NavCartLink = styled(LinkRouter)`
     &:hover {
         color: #01BF71;
     }
+
+    @media only screen and (max-width: 360px) {
+        display: none;
+    }
 `
 
 // Navbar
@@ -253,23 +261,27 @@ const Nav = ({toggle}) => {
       window.addEventListener('scroll', changeBgNav)
     }, [])
 
+    const toggleHome = () => {
+        scroll.scrollToTop(); 
+    }
+
     return (
         <Container scrollNav={scrollNav}>
             <NavContainer>
-                <NavLogo to='/' scrollNav={scrollNav}>BRONX</NavLogo>
+                <NavLogo to='/' onClick={toggleHome} scrollNav={scrollNav}>BRONX</NavLogo>
                 <NavSearch scrollNav={scrollNav}>
                     <Search style={{fontSize: 18, marginLeft: 5}}/>
                     <Input scrollNav={scrollNav} placeholder='buscar productos...'/>
                 </NavSearch>
                 <NavMenu>
                     <NavItem>
-                        <Link to='categories' scrollNav={scrollNav}>Colecciones</Link>        
+                        <Link to='categories'scrollNav={scrollNav} smooth={true} duration={800} spy={true} exact="true" offset={-2}>Colecciones</Link>        
                     </NavItem>
                     <NavItem>
-                        <Link to='products' scrollNav={scrollNav}>Categorías</Link>           
+                        <Link to='products' scrollNav={scrollNav} smooth={true} duration={800} spy={true} exact="true" offset={2}>Categorías</Link>           
                     </NavItem>
                     <NavItem>
-                        <Link to='announcement' scrollNav={scrollNav}>Novedades</Link>          
+                        <Link to='announcement' scrollNav={scrollNav} smooth={true} duration={800} spy={true} exact="true" offset={2}>Novedades</Link>          
                     </NavItem>
                 </NavMenu>
                 <NavSign>

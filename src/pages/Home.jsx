@@ -1,6 +1,5 @@
 import React from 'react'
 import Categories from '../components/Categories'
-import NavFilters from '../components/NavFilters'
 import Newsletter from '../components/Newsletter'
 import Products from '../components/Products'
 import Slider from '../components/Slider'
@@ -16,7 +15,6 @@ const Home = () => {
       <NavbarHome />
       <Clip />
       <Categories />
-      <NavFilters />
       <Products />
       <Slider />
       <Newsletter />

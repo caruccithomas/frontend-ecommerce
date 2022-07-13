@@ -5,6 +5,7 @@ import { Link as LinkScroll } from 'react-scroll'
 import { IoIosArrowForward } from 'react-icons/io'
 import { RiLoginBoxLine } from 'react-icons/ri'
 import { FaRegUserCircle } from 'react-icons/fa'
+import { GrCart } from 'react-icons/gr'
 
 // Components
 
@@ -71,7 +72,7 @@ const SidebarTitle = styled.h1`
 `
 
 const SidebarButton = styled.div`
-    display: flex;
+    display: ${props => props.type === "cart" ? "none" : "flex"};
     width: 100%;
     justify-content: center;
     padding: 20px;
@@ -80,6 +81,10 @@ const SidebarButton = styled.div`
         transition: all 0.2s ease-in-out;
         background-color: #01bf71;
         color: #000;
+    }
+
+    @media only screen and (max-width: 360px) {
+        display: ${props => props.type === "cart" && "flex"};
     }
 `
 
@@ -116,6 +121,10 @@ const Sidebar = ({isOpen, toggle}) => {
                         <IoIosArrowForward />
                     </SidebarLink>
                 </SidebarMenu>
+                <SidebarButton type="cart">
+                    <GrCart style={{marginRight:"10px", fontSize:"20px"}} />
+                    <SidebarRoute to='/cart'>Mi Carrito</SidebarRoute>
+                </SidebarButton>
                 <SidebarButton>
                     <RiLoginBoxLine style={{marginRight:"10px", fontSize:"20px"}} />
                     <SidebarRoute to='/login'>Ingresar</SidebarRoute>

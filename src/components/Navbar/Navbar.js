@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link as LinkRouter } from 'react-router-dom'
 import { Link as LinkScroll } from 'react-scroll'
+import { animateScroll as scroll } from 'react-scroll'
 import { Search, ShoppingCart } from '@material-ui/icons'
 import { Badge } from '@material-ui/core'
 import Hamburger from 'hamburger-react'
@@ -232,15 +233,24 @@ const NavCartLink = styled(LinkRouter)`
     &:hover {
         color: #01BF71;
     }
+
+    @media only screen and (max-width: 600px) {
+        display: none;
+    }
 `
 
 // Navbar
 
 const Nav = ({toggle}) => {
+
+    const toggleHome = () => {
+        scroll.scrollToTop(); 
+    }
+
     return (
         <Container>
             <NavContainer>
-                <NavLogo to='/' >BRONX</NavLogo>
+                <NavLogo to='/'>BRONX</NavLogo>
                 <NavSearch>
                     <Search style={{fontSize: 18, marginLeft: 5}}/>
                     <Input placeholder='buscar productos...'/>
@@ -264,7 +274,7 @@ const Nav = ({toggle}) => {
                     <SearchIcon>
                         <Search />
                     </SearchIcon>
-                    <NavCartLink to='/cart'>
+                    <NavCartLink to='/cart' onClick={toggleHome}>
                         <Badge badgeContent={3} color="transparent">
                             <ShoppingCart />
                         </Badge>    

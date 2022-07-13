@@ -130,11 +130,17 @@ const Clip = () => {
                 </Description>
                 <ButtonWrapper>
                     <Button
-                        to="slider"
+                        to="categories"
                         onMouseEnter={onHover}
                         onMouseLeave={onHover}
                         primary="true"
                         dark="true"
+                        // Smooth Scroll
+                        smooth={true}
+                        duration={1000}
+                        spy={true}
+                        exact="true"
+                        offset={-80}
                     >
                         empezar ahora {hover ? <ArrowForward /> : <ArrowRight />}
                     </Button>

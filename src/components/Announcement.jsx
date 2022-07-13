@@ -46,7 +46,7 @@ const Text = styled.p`
 
 const Announcement = () => {
     return (
-        <Container id='announcement'>
+        <Container>
             <ScrollFixed />
             <Text>
                 « hasta <b style={{margin: '0 4px'}}>50% OFF</b> pagando con tarjetas de crédito y débito »

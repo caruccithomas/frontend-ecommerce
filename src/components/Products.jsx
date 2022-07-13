@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import Product from './ProductItem'
 import { popular_products } from '../data'
+import NavFilters from './NavFilters'
 
 // Components
 
 const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`
+
+const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -23,10 +29,13 @@ const Container = styled.div`
 
 const Products = () => {
   return (
-    <Container>
-      {popular_products.map(item => (
-          <Product item={item} key={item.id} />
-      ))}
+    <Container id='products'>
+      <NavFilters />
+      <Wrapper>
+        {popular_products.map(item => (
+            <Product item={item} key={item.id} />
+        ))}
+      </Wrapper>
     </Container>
   )
 }

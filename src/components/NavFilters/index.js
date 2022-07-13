@@ -16,7 +16,7 @@ const TitleContainer = styled.div`
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    box-shadow: 0px 1px 8px 1px lightgrey;
+    box-shadow: 1px 1px 8px 1px lightgrey;
     margin-bottom: 20px;
     margin-left: 80px;
     margin-right: 80px;
@@ -163,7 +163,7 @@ const Option = styled.option`
 
 const NavFilters = () => {
     return (
-        <Container id='products'>
+        <Container>
             <TitleContainer>
               <Title>PRENDAS & ACCESORIOS</Title>
             </TitleContainer>

@@ -7,7 +7,9 @@ import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
 
 // Components
 
-const Container = styled.div`
+const Container = styled.div``
+
+const ContentWrapper = styled.div`
     width: 100%;
     height: 95vh;
     display: flex;
@@ -213,9 +215,9 @@ const Slider = () => {
     }
 
     return (
-        <Fragment>
+        <Container id='announcement'>
             <Announcement />
-            <Container>
+            <ContentWrapper>
                 <Arrow direction="left" onClick={() => handleClick("left")}>
                     <IoIosArrowBack style={{fontSize: '1.5em'}} />
                 </Arrow>
@@ -236,9 +238,9 @@ const Slider = () => {
                 <Arrow direction="right" onClick={() => handleClick("right")}>
                     <IoIosArrowForward style={{fontSize: '1.5em'}} />
                 </Arrow>
-            </Container>
+            </ContentWrapper>
             <OtherAnnouncement />
-        </Fragment>
+        </Container>
     )
 }
 

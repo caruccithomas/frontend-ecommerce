@@ -30,7 +30,7 @@ const Container = styled.div`
 
 const ProductWrapper = styled.div`
     width: 100%;
-    min-width: 270px;
+    min-width: 220px;
 `
 
 const ImageWrapper = styled.div`
@@ -42,7 +42,7 @@ const ImageWrapper = styled.div`
     align-items: center;
     justify-content: center;
     background-color: #fff;
-    box-shadow: 1px 1px 4px 1px lightgrey;
+    box-shadow: 1px 1px 8px 1px lightgrey;
 
     &:hover ${Info}{
         opacity: 1;

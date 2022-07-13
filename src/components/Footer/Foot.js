@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from 'react-router-dom'
 import { FaInstagram, FaLinkedin, FaYoutube, FaFacebook, FaSnapchat } from 'react-icons/fa'
+import { animateScroll as scroll } from 'react-scroll'
 
 // Components
 
@@ -87,11 +88,15 @@ const SocialIconLink = styled.a`
 // Foot Extension
 
 const Foot = () => {
+    const toggleHome = () => {
+        scroll.scrollToTop(); 
+    }
+
     return (
         <Container>
             <SocialMediaWrapper>
                 <SocialMedia>
-                    <SocialMediaLogo to='/'>
+                    <SocialMediaLogo to='/' onClick={toggleHome}>
                         BRONX <LogoDescription> boutique </LogoDescription>
                     </SocialMediaLogo>
                 </SocialMedia>
