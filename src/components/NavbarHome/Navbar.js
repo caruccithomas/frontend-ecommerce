@@ -64,8 +64,11 @@ const MobileIcon = styled.div`
     display: none;
     position: sticky;
     background: ${({scrollNav}) => (scrollNav ? 'rgb(240,240,240) linear-gradient(90deg, rgba(240,240,240,1) 0%, rgba(245,245,245,1) 15%, rgba(255,255,255,1) 50%, rgba(244,244,244,1) 85%, rgba(237,237,237,1) 100%)' : 'transparent')};
-    box-shadow: ${({scrollNav}) => (scrollNav ? '0px 0px 6px 0px lightgrey' : '')};
+    box-shadow: ${({scrollNav}) => (scrollNav ? '0px 0px 6px 0px grey' : '')};
     transition: all 0.5s ease-in-out;
+    z-index: 999;
+
+    margin-right: ${({toggle}) => (toggle ? '35vw' : '0px')};
 
     @media only screen and (max-width: 950px) {
         display: flex;

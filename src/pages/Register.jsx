@@ -232,14 +232,16 @@ const Info = styled.h3`
     }
 `
 
-const Link = styled.a`
+const Link = styled(LinkRouter)`
     display: flex;
     text-align: center;
     font-weight: 600;
     font-size: 13px;
+    text-decoration: none;
     text-shadow: 1px 1px 4px lightgrey;
-    transition: all 0.5s ease-in-out;
+    color: #000;
     cursor: pointer;
+    transition: all 0.5s ease-in-out;
 
     &:hover {
         color: #01bf71;
@@ -308,7 +310,7 @@ const Register = () => {
                             <Button>REGISTRARSE</Button>
                             <LoginWrapper>
                                 <Info>¿Ya tienes una cuenta?</Info>
-                                <Link>INICIA SESIÓN</Link>
+                                <Link to='/login'>INICIA SESIÓN</Link>
                             </LoginWrapper>
                         </Form>
                     </Wrapper>

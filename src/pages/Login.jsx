@@ -126,12 +126,13 @@ const LinkContainer = styled.div`
 `
 
 
-const Link = styled.a`
+const Link = styled(LinkRouter)`
     margin: 10px 0;
     font-size: 12px;
     cursor: pointer;
     font-style: italic;
     text-align: ${props => props.direction === 'left' ? 'left' : 'right'};
+    text-decoration: none;
     color: #000;
 
     &: hover{
@@ -165,8 +166,8 @@ const Login = () => {
                             <Input placeholder="contraseña" />
                         </InputContainer>
                         <LinkContainer>
-                            <Link direction='left'>Olvidé mi Contraseña</Link>
-                            <Link direction='right'>Crear un Usuario</Link>
+                            <Link direction='left'to='/'>Olvidé mi Contraseña</Link>
+                            <Link direction='right' to='/register'>Crear un Usuario</Link>
                         </LinkContainer>
                         <Button>INGRESAR</Button>
                     </Form>

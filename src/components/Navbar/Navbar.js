@@ -64,7 +64,8 @@ const MobileIcon = styled.div`
     display: none;
     position: sticky;
     background: rgb(240,240,240) linear-gradient(90deg, rgba(240,240,240,1) 0%, rgba(245,245,245,1) 15%, rgba(255,255,255,1) 50%, rgba(244,244,244,1) 85%, rgba(237,237,237,1) 100%);
-    box-shadow: 0px 0px 5px 0px lightgrey;
+    box-shadow: 0px 0px 6px 0px grey;
+    z-index: 999;
 
     @media only screen and (max-width: 950px) {
         display: flex;
