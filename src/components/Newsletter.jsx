@@ -69,6 +69,8 @@ const InputContainer = styled.div`
 `
 
 const Input = styled.input`
+    width: 100%;
+    height: 100%;
     border: none;
     flex: 8;
     padding-left: 20px;

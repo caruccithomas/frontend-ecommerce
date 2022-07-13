@@ -20,7 +20,7 @@ const NavLogo = styled(LinkRouter)`
     color: #000;
     display: flex;
     margin-bottom: 20px;
-    font-size: 1.8em;
+    font-size: 2em;
     font-weight: 900;
     font-family: 'Lato', sans-serif;
     letter-spacing: 1px;

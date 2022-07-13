@@ -30,7 +30,7 @@ const Arrow = styled.div`
     opacity: 0.8;
     z-index: 2;
 
-    @media only screen and (max-width: 950px) {
+    @media only screen and (max-width: 920px) {
         left: ${props => props.direction === "left" && "0"};
         right: ${props => props.direction === "right" && "0"};
         transition: all 0.5s ease-in-out;
@@ -39,13 +39,10 @@ const Arrow = styled.div`
 
 const Wrapper = styled.div`
     display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 1.5s ease;
     transform: translateX(${(props) => props.slideIndex * -100}vw);
-
-    @media only screen and (max-width: 820px) {
-        align-items: center;
-        justify-content: center;
-    }
 `
 
 const Slide = styled.div`
@@ -56,32 +53,34 @@ const Slide = styled.div`
     justify-content: center;
     background-color: #${(props) => props.background};
 
-    @media only screen and (max-width: 820px) {
+    @media only screen and (max-width: 920px) {
         flex-direction: column;
     }
 `
 
 const Image = styled.img`
-    height: 80%;
     flex: 1;
+    height: 70vh;
     object-fit: contain;
     z-index: 1;
-    transition: all 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     @media only screen and (max-width: 1280px) {
         transition: all 0.5s ease-in-out;
-        height: 75%;
+        height: 60vh;
     }
 
-    @media only screen and (max-width: 820px) {
+    @media only screen and (max-width: 920px) {
         transition: all 0.5s ease-in-out;
-        height: 60%;
-        margin-top: 30px;
-        margin-bottom: 5px;
+        height: 20vh;
+        margin-top: 80px;
     }
 
-    @media screen and (max-width: 520px) {
-        height: 68%;
+    @media screen and (max-width: 420px) {
+        transition: all 0.5s ease-in-out;
+        width: 50vw;
     }
 `
 
@@ -93,7 +92,7 @@ const InfoContainer = styled.div`
     align-items: left;
     justify-content: center;
 
-    @media only screen and (max-width: 820px) {
+    @media only screen and (max-width: 920px) {
         align-items: center;
         justify-content: flex-start;
     }
@@ -101,26 +100,29 @@ const InfoContainer = styled.div`
 const Title = styled.h1`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     font-size: 4em;
     text-shadow: 3px 3px 3px gray;
     transition: all 0.5s ease-in-out;
     width: 50%;
+    max-width: 200px;
 
     @media only screen and (max-width: 1280px) {
         transition: all 0.5s ease-in-out;
         font-size: 3em;
     }
 
-    @media screen and (max-width: 820px) {
+    @media screen and (max-width: 920px) {
         transition: all 0.5s ease-in-out;
-        font-size: 2em;
         text-align: center;
         width: 100%;
     }
 
     @media screen and (max-width: 520px) {
-        font-size: 1.5em;
+        font-size: 2.5em;
+        text-align: center;
+        justify-content: center;
+        max-width: 150px;
     }
 `
 
@@ -133,18 +135,16 @@ const Description = styled.p`
     transition: all 0.5s ease-in-out;
 
     @media only screen and (max-width: 1280px) {
-        transition: all 0.5s ease-in-out;
         font-size: 12px;
     }
 
-    @media screen and (max-width: 820px) {
-        transition: all 0.5s ease-in-out;
+    @media screen and (max-width: 920px) {
         padding: 20px 0;
         font-size: 9px;
         text-align: center;
     }
 
-    @media screen and (max-width: 520px) {
+    @media screen and (max-width: 380px) {
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -156,7 +156,7 @@ const ButtonContainer = styled.div`
     background: #fff;
     padding: 2vh 2vw;
     font-size: 1em;
-    width: 200%;
+    width: 250%;
     z-index: 0;
     letter-spacing: 1px;
     cursor: pointer;
@@ -166,7 +166,13 @@ const ButtonContainer = styled.div`
         background-color: #01bf71;
     }
 
-    @media only screen and (max-width: 820px) {
+    @media only screen and (max-width: 1280px) {
+        transition: all 0.5s ease-in-out;
+        width: 250%;
+    }
+
+    @media screen and (max-width: 920px) {
+        transition: all 0.5s ease-in-out;
         width: 230px;
         padding: 10px 0;
         align-items: center;
@@ -188,7 +194,7 @@ const Button = styled.button`
         font-size: 12px;
     }
 
-    @media screen and (max-width: 820px) {
+    @media screen and (max-width: 920px) {
         font-size: 10px;
     }
 `

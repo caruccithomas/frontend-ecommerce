@@ -2,7 +2,50 @@ import React, { Fragment } from 'react'
 import { Link as LinkRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from '../components/Footer'
-import SVGImage from '../components/registers/register_02.svg'
+import SVGImage from './svg/svg_10.svg'
+
+const NavLogo = styled(LinkRouter)`
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 75vh;
+    padding-right: 80px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    box-shadow: 2px 2px 8px lightgrey;
+    background: whitesmoke;
+    color: #0d0d0d;
+    font-size: 1.6em;
+    font-weight: 900;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.5s ease-in-out;
+    z-index: 1;
+
+    &:hover {
+        color: #01bf71; 
+    }
+
+    @media only screen and (max-width: 1280px) {
+        margin-top: 125vh;
+        font-size: 1.6em;
+    }
+
+    @media screen and (max-width: 1080px) {
+        display: none;
+    }
+`
+
+const LogoText = styled.h2`
+    font-weight: 200;
+    font-size: 1em;
+    margin-left: 6px;
+    letter-spacing: -1px;
+`
 
 const Container = styled.div`
     display: flex;
@@ -11,13 +54,18 @@ const Container = styled.div`
     background: linear-gradient( rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3) ), url('images/logins/background_02.jpg') center;
     background-size: cover;
     padding: 40px 80px;
+    column-gap: 20px;
 
-    @media screen and (max-width: 1280px) {
+    @media only screen and (max-width: 1280px) {
         transition: all 0.5s ease-in-out;
         padding: 20px 40px;
         flex-direction: column;
         height: 100%;
         row-gap: 20px;
+    }
+
+    @media screen and (max-width: 380px) {
+        padding: 20px 15px;
     }
 `
 
@@ -29,41 +77,7 @@ const LeftWrapper = styled.div`
     justify-content: center;
     width: 100%;
     height: 100%;
-`
-
-const NavLogo = styled(LinkRouter)`
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    font-size: 2em;
-    font-weight: 900;
-    font-family: 'Lato', sans-serif;
-    letter-spacing: 1px;
-    cursor: pointer;
-    text-decoration: none;
-
-    &:hover {
-        color: #01BF71;
-    }
-
-    @media only screen and (max-width: 1080px) {
-        transition: all 0.5s ease-in-out;
-        font-size: 1.8em;
-    }
-
-    @media screen and (max-width: 380px) {
-        transition: all 0.5s ease-in-out;
-        font-size: 1.4em;
-    }
-`
-
-const LogoText = styled.h2`
-    font-weight: 200;
-    font-size: 1em;
-    margin-left: 6px;
-    letter-spacing: -1px;
+    z-index: 2;
 `
 
 const Wrapper = styled.div`
@@ -103,6 +117,14 @@ const Title = styled.h1`
     letter-spacing: 1px;
     margin-bottom: 30px;
     text-align: center;
+
+    @media only screen and (max-width: 500px) {
+        font-size: 20px;
+    }
+
+    @media screen and (max-width: 380px) {
+        font-size: 20px;
+    }
 `
 
 const Text = styled.h2`
@@ -128,8 +150,13 @@ const Input = styled.input`
     border: 1px solid grey;
 
     @media only screen and (max-width: 1080px) {
-        transition: all 0.5s ease-in-out;
         margin: 4px;
+    }
+
+    @media screen and (max-width: 800px) {
+        transition: all 0.5s ease-in-out;
+        flex-direction: column;
+        min-width: 100%;
     }
 `
 
@@ -161,7 +188,6 @@ const Button = styled.button`
 
     &: hover{
         transition: all 0.5s ease-in-out;
-        transform: scale(0.92);
         background-color: #0d0d0d;
         color: #fff;
     }
@@ -175,31 +201,42 @@ const LoginWrapper = styled.div`
     background: white;
     border-radius: 50px;
     box-shadow: 1px 1px 8px 1px lightgrey;
-    padding: 10px 15px;
-    margin-left: auto;
+    padding: 12px;
+    margin-top: 12px;
+
+    @media screen and (max-width: 300px) {
+        box-shadow: none;
+        padding: 0;
+        margin-top: 20px;
+    }
 `
 
 const Info = styled.h3`
     display: flex;
+    text-align: center;
     margin-right: 5px;
     font-weight: 300;
     font-size: 14px;
     transition: all 0.5s ease-in-out;
 
-    @media only screen and (max-width: 1080px) {
+    @media only screen and (max-width: 500px) {
         font-size: 12px;
     }
 
-    @media screen and (max-width: 380px) {
+    @media screen and (max-width: 400px) {
         font-size: 10px;
+    }
+
+    @media screen and (max-width: 300px) {
+        
     }
 `
 
 const Link = styled.a`
     display: flex;
+    text-align: center;
     font-weight: 600;
-    font-size: 15px;
-    letter-spacing: 1px;
+    font-size: 13px;
     text-shadow: 1px 1px 4px lightgrey;
     transition: all 0.5s ease-in-out;
     cursor: pointer;
@@ -220,6 +257,7 @@ const Link = styled.a`
 const RightWrapper = styled.div`
     flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     max-width: 1200px;
@@ -231,8 +269,9 @@ const RightWrapper = styled.div`
 `
 
 const Image = styled.img`
-    width: 0%;
+    width: 60vh;
     object-fit: contain;
+    z-index: 2;
 
     @media only screen and (max-width: 1280px) {
         transition: all 0.5s ease-in-out;
@@ -246,11 +285,11 @@ const Image = styled.img`
 const Register = () => {
     return (
         <Fragment>
+            <NavLogo to='/'> BRONX
+                <LogoText>boutique</LogoText>
+            </NavLogo>
             <Container>
                 <LeftWrapper>
-                    <NavLogo to='/'> BRONX
-                        <LogoText>boutique</LogoText>
-                    </NavLogo>
                     <Wrapper>
                         <Form>
                             <Title>Crear una cuenta en BRONX</Title>
@@ -269,7 +308,7 @@ const Register = () => {
                             <Button>REGISTRARSE</Button>
                             <LoginWrapper>
                                 <Info>¿Ya tienes una cuenta?</Info>
-                                <Link>Iniciar Sesión</Link>
+                                <Link>INICIA SESIÓN</Link>
                             </LoginWrapper>
                         </Form>
                     </Wrapper>
