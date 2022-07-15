@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Link as LinkRouter } from 'react-router-dom'
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
-import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined'
+import BsPerson from 'react-icons/bs'
+import BsKey from 'react-icons/bs'
 import styled from 'styled-components'
 import Footer from '../components/Footer'
 
@@ -158,11 +158,11 @@ const Login = () => {
                     <Title>Iniciar Sesión</Title>
                     <Form>
                         <InputContainer>
-                            <PersonOutlineOutlinedIcon style={{fontSize:'20px', marginRight:'5px'}} />
+                            <BsPerson style={{fontSize:'20px', marginRight:'5px'}} />
                             <Input placeholder="nombre de usuario" />
                         </InputContainer>
                         <InputContainer>
-                            <VpnKeyOutlinedIcon style={{fontSize:'20px', marginRight:'5px'}} />
+                            <BsKey style={{fontSize:'20px', marginRight:'5px'}} />
                             <Input placeholder="contraseña" />
                         </InputContainer>
                         <LinkContainer>
