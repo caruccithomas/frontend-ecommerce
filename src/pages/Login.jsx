@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 import { Link as LinkRouter } from 'react-router-dom'
-import BsPerson from 'react-icons/bs'
-import BsKey from 'react-icons/bs'
+import { BsPerson, BsKey } from 'react-icons/bs'
 import styled from 'styled-components'
 import Footer from '../components/Footer'
 
