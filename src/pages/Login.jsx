@@ -23,7 +23,7 @@ const BackgroundClip = styled.div`
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
 `
 
@@ -31,7 +31,7 @@ const Video = styled.video`
     display: none;
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     -o-object-fit: cover;
     object-fit: cover;
 
