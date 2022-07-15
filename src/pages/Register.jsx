@@ -14,7 +14,7 @@ const NavLogo = styled(LinkRouter)`
     padding-right: 80px;
     padding-top: 6px;
     padding-bottom: 6px;
-    box-shadow: 2px 2px 8px lightgrey;
+    box-shadow: 1px 1px 4px lightgrey;
     background: whitesmoke;
     color: #0d0d0d;
     font-size: 1.6em;

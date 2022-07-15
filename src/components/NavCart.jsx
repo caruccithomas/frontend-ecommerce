@@ -9,13 +9,14 @@ import { FiShoppingBag } from 'react-icons/fi'
 const Container = styled.div`
     flex: 1;
     width: 100%;
-    height: 20vh;
+    height: 20%;
+    padding-bottom: 20px;
 `
 
 const Wrapper = styled.div`
     display: flex;
     margin: 0 80px;
-    height: 18.5vh;
+    height: 100px;
 
     @media only screen and (max-width: 950px) {
         margin: 0 20px;
@@ -29,7 +30,7 @@ const Video = styled.video`
     display: flex;
     position: absolute;
     width: 100%;
-    height: 20vh;
+    height: 120px;
     -o-object-fit: cover;
     object-fit: cover;
     z-index: 0;

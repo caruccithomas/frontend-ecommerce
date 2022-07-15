@@ -47,11 +47,16 @@ const ProductTarget = styled.div`
     background-color: #f2f2f2;
     box-shadow: 2px 2px 10px 2px lightgrey;
     margin-bottom: 20px;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+        transform: scale(0.98);
+        box-shadow: 1px 1px 10px 1px grey;
+    }
 
     @media only screen and (max-width: 600px) {
         flex-direction: column;
         height: 88vh;
-        transition: all 0.5s ease-in-out;
     }
 `
 

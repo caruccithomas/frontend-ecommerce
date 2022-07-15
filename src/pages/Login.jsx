@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { Link as LinkRouter } from 'react-router-dom'
 import { BsPerson, BsKey } from 'react-icons/bs'
 import styled from 'styled-components'
+import Videos from './login_video/video_06.mp4'
 import Footer from '../components/Footer'
 
 const Container = styled.div`
@@ -15,16 +16,42 @@ const Container = styled.div`
     justify-content: center;
 `
 
+const BackgroundClip = styled.div`
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+`
+
+const Video = styled.video`
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+
+    @media only screen and (max-width: 500px) {
+        display: flex;
+    }
+`
+
 const NavLogo = styled(LinkRouter)`
-    color: #000;
     display: flex;
     margin-bottom: 20px;
+    color: #0d0d0d;
     font-size: 2em;
     font-weight: 900;
     font-family: 'Lato', sans-serif;
+    text-shadow: 1px 1px 4px lightgrey;
     letter-spacing: 1px;
     cursor: pointer;
     text-decoration: none;
+    z-index: 10;
 
     &:hover {
         color: #01BF71;
@@ -150,6 +177,9 @@ const Login = () => {
     return (
         <Fragment>
             <Container>
+                <BackgroundClip>
+                    <Video autoPlay loop muted src={Videos} type='video/mp4' />
+                </BackgroundClip>
                 <NavLogo to='/'> BRONX
                     <LogoText>boutique</LogoText>
                 </NavLogo>
