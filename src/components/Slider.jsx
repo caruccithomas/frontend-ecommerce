@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from "react"
+import React, { useState} from "react"
 import styled from "styled-components"
 import Announcement from "../components/Announcement"
 import OtherAnnouncement from "../components/OtherAnnouncement"

@@ -1,6 +1,7 @@
 {
   "name": "new",
   "version": "0.1.0",
+  "homepage" : "http://caruccithomas.github.io/bronx-ecommerce",
   "private": true,
   "dependencies": {
     "@emotion/styled": "^11.8.1",
