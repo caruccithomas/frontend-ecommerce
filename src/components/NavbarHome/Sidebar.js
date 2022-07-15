@@ -14,7 +14,7 @@ const SidebarContainer = styled.aside`
     z-index: 20;
     margin-top: 80px;
     width: 350px;
-    height: 87vh;
+    height: 91vh;
     background: rgb(240,240,240) linear-gradient(90deg, rgba(240,240,240,1) 0%, rgba(245,245,245,1) 15%, rgba(255,255,255,1) 50%, rgba(244,244,244,1) 85%, rgba(237,237,237,1) 100%);
     box-shadow: 1px 1px 10px 1px grey;
     display: grid;

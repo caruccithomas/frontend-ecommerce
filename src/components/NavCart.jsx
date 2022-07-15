@@ -1,8 +1,8 @@
 import React from "react"
 import styled from 'styled-components'
 import Videos from '../components/Clip/videos/horizontal/video_10.mp4'
-import { FavoriteBorderOutlined, ShoppingBagOutlined } from '@mui/icons-material'
-
+import { MdFavoriteBorder } from 'react-icons/md'
+import { FiShoppingBag } from 'react-icons/fi'
 
 // Components
 
@@ -165,14 +165,14 @@ const NavCart = () => {
                 <ButtonWrapper>
                     <Button>
                         <ShoppingIcon>
-                            <ShoppingBagOutlined style={{fontSize:'20px'}} />
+                            <FiShoppingBag style={{fontSize:'18px', marginLeft:'5px'}} />
                             <Text>INVENTARIO</Text>
                         </ShoppingIcon>
                         <Circle type='filled'>3</Circle>
                     </Button>
                     <Button>
                         <FavoriteIcon>
-                            <FavoriteBorderOutlined style={{fontSize:'20px'}} />
+                            <MdFavoriteBorder style={{fontSize:'18px', marginLeft:'5px'}} />
                             <Text>FAVORITOS</Text>
                         </FavoriteIcon>
                         <Circle type='none'>0</Circle>
