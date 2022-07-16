@@ -339,6 +339,7 @@ const DiscountButton = styled.button`
     border-radius: 50px;
 
     &:hover {
+        transition: all 0.5s ease-in-out;
         background-color: #0d0d0d;
         color: #fff;
 
