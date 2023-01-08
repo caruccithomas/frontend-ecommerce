@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styled from 'styled-components'
-import Videos from '../Clip/videos/horizontal/video_02.mp4'
+import Videos from '../../videos/horizontal/video_02.mp4'
 import { MdKeyboardArrowRight, MdArrowForward } from 'react-icons/md'
-import { Button } from "./ButtonReusable"
+import { Button } from "./button"
 
 // Components
 
@@ -40,7 +40,7 @@ const BackgroundClip = styled.div`
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
 `
 
@@ -62,12 +62,15 @@ const Content = styled.div`
 `
 
 const Title = styled.h1`
-    color: #FFFFFF;
-    font-size: 48px;
+    color: #fff;
+    font-size: 40px;
     text-align: center;
+    letter-spacing: 2px;
+    transition: all 0.5s ease-in-out;
 
     @media only screen and (max-width: 780px) {
         font-size: 40px;
+        letter-spacing: 1px;
     }
 
     @media only screen and (max-width: 480px) {
@@ -75,19 +78,44 @@ const Title = styled.h1`
     }
 `
 
-const Description = styled.p`
+// const Description = styled.p`
+//     margin-top: 24px;
+//     color: #fff;
+//     font-size: 24px;
+//     text-align: center;
+//     letter-spacing: 2px;
+//     max-width: 600px;
+
+//     @media only screen and (max-width: 780px) {
+//         font-size: 24px;
+//     }
+
+//     @media only screen and (max-width: 480px) {
+//         font-size: 18px;
+//     }
+// `
+
+const Description = styled.span`
     margin-top: 24px;
-    color: #FFFFFF;
+    color: #fff;
     font-size: 24px;
+    font-weight: 100;
     text-align: center;
     max-width: 600px;
+    letter-spacing: 1px;
 
     @media only screen and (max-width: 780px) {
-        font-size: 24px;
+        max-width: 500px;
+        font-size: 22px;
     }
 
-    @media only screen and (max-width: 480px) {
-        font-size: 18px;
+    @media screen and (max-width: 480px) {
+        max-width: 300px;
+        font-size: 20px;
+    }
+
+    @media screen and (max-width: 480px) {
+        max-width: 240px;
     }
 `
 
@@ -108,10 +136,23 @@ const ArrowRight = styled(MdKeyboardArrowRight)`
     font-size: 20px;
 `
 
+const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla neque lorem, porta a aliquam non, tempor sit amet ligula. Integer tempor tincidunt aliquet.';
+
 // Clip
 
 const Clip = () => {
+    const [binaryText, setBinaryText] = useState('');
     const [hover, setHover] = useState(false);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setBinaryText(text.slice(0, binaryText.length + 1))
+        }, 60);
+
+        // return timeout
+        return () => clearTimeout(timeout);
+    }, [binaryText]);
+
     const onHover = () => {
         setHover(!hover);
     }
@@ -122,12 +163,10 @@ const Clip = () => {
                 <Video autoPlay loop muted src={Videos} type='video/mp4' />
             </BackgroundClip>
             <Content>
-                <Title>NEW ARRIVALS</Title>
-                <Description>
-                    Kawasaki Wasabi Kawasaki Wasabi Kawasaki Wasabi
-                    Kawasaki Wasabi Kawasaki Wasabi Kawasaki Wasabi
-                    Kawasaki Wasabi Kawasaki Wasabi Kawasaki Wasabi
-                </Description>
+                <Title>FALL '23</Title>
+                    <Description>
+                        {binaryText}
+                    </Description>
                 <ButtonWrapper>
                     <Button
                         to="categories"
@@ -140,7 +179,7 @@ const Clip = () => {
                         duration={1000}
                         spy={true}
                         exact="true"
-                        offset={-80}
+                        offset={0}
                     >
                         empezar ahora {hover ? <ArrowForward /> : <ArrowRight />}
                     </Button>

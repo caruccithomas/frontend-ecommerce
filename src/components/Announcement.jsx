@@ -3,20 +3,19 @@ import styled from 'styled-components'
 
 // Components
 
-const Container = styled.div`
+const Container = styled.nav`
     width: 100%;
+    top: 0;
+    height: 25px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-`
-
-const ScrollFixed = styled.div`
-    display: flex;
     flex-direction: column;
-    height: 50px;
-    width: 100%;
-    background: transparent;
+    position: sticky;
+    background-color: #000;
+    color: whitesmoke;
+    transition: all 0.2s ease-in-out;
+    z-index: 10;
 `
 
 const Text = styled.p`
@@ -24,35 +23,30 @@ const Text = styled.p`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 30px;
-    font-size: 14px;
-    font-weight: 590;
-    background-color: #fff;
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
-    color: #000;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    transition: all 0.5s ease-in-out;
 
     @media only screen and (max-width: 768px) {
-        font-size: 12px;
+        font-size: 10px;
     }
 
     @media only screen and (max-width: 400px) {
-        font-size: 10px;
-        height: 25px;
+        font-size: 9px;
     }
 `
 
 // Announcement
 
-const Announcement = () => {
+const FirstAnnouncement = () => {
     return (
         <Container>
-            <ScrollFixed />
             <Text>
-                « hasta <b style={{margin: '0 4px'}}>50% OFF</b> pagando con tarjetas de crédito y débito »
+                productos con envíos y devoluciones gratuitas
             </Text>
         </Container>
     )
 }
 
-export default Announcement
+export default FirstAnnouncement

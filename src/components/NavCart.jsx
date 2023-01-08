@@ -1,8 +1,12 @@
 import React from "react"
+import { styled as styles } from '@material-ui/styles'
 import styled from 'styled-components'
-import Videos from '../components/Clip/videos/horizontal/video_10.mp4'
-import { MdFavoriteBorder } from 'react-icons/md'
-import { FiShoppingBag } from 'react-icons/fi'
+import Videos from '../videos/horizontal/video_01.mp4'
+import { MdFavorite } from 'react-icons/md'
+import { AiFillShopping } from 'react-icons/ai'
+import { Badge } from '@mui/material'
+import { useSelector } from 'react-redux'
+import { Link } from "react-router-dom"
 
 // Components
 
@@ -10,7 +14,6 @@ const Container = styled.div`
     flex: 1;
     width: 100%;
     height: 20%;
-    padding-bottom: 20px;
 `
 
 const Wrapper = styled.div`
@@ -41,8 +44,9 @@ const ButtonWrapper = styled.div`
     flex: 1;
     align-items: flex-end;
     justify-content: flex-start;
+    column-gap: 8px;
     z-index: 1;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
     @media only screen and (max-width: 500px) {
         width: 100%;
@@ -54,27 +58,21 @@ const Button = styled.span`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
-    padding: 3px 5px;
+    background-color: rgba(91, 91, 91, 0.5);
+    padding: 6px 12px;
     border-radius: 50px;
-    border: 1px solid white;
-    box-shadow: 2px 2px 6px black;
+    border: 1px solid whitesmoke;
     text-decoration: none;
-    font-size: 1em;
+    font-size: 15px;
     cursor: pointer;
-    margin-right: 3%;
-    color: white;
+    color: whitesmoke;
     backdrop-filter: blur(10px);
+    transition: all 0.3s ease-in;
 
     &:hover {
         color: #01bf71;
-        border: 2px solid #01bf71;
+        border: 1px solid #01bf71;
         transform: scale(0.95);
-        transition: all 0.2s ease-in;
-    }
-
-    @media only screen and (max-width: 500px) {
-        margin: 0 2%;
     }
 `
 
@@ -86,8 +84,9 @@ const ShoppingIcon = styled.div`
 
 const Text = styled.h1`
     display: flex;
-    padding-left: 4px;
-    font-size: 1em;
+    padding-left: 5px;
+    font-size: 16px;
+    font-weight: 600;
     font-family: 'Audiowide', cursive;
     letter-spacing: 1px;
 
@@ -100,22 +99,30 @@ const Text = styled.h1`
     }
 `
 
+const StyledBadge = styles(Badge)(() => ({
+    '& .MuiBadge-badge': {
+      right: 10,
+      top: 10,
+      color: 'whitesmoke',
+      backgroundColor: '#01bf71',
+      textShadow: '1px 1px 2px #000',
+      fontWeight: '700',
+    },
+}));
+
 const Circle = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 6px;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     box-shadow: ${props => props.type === 'filled' ? '1px 1px 4px #0d0d0d' : 'none'};
     font-weight: 800;
+    font-size: 12px;
     color: ${props => props.type === 'filled' ? 'whitesmoke' : '#0d0d0d'};
-    background-color: ${props => props.type === 'filled' ? 'red' : 'white'};
-
-    &:hover {
-        transform: ${props => props.type === 'filled' ? 'scale(1.12)' : 'none'};
-    }
+    background-color: ${props => props.type === 'filled' ? '#01bf71' : 'whitesmoke'};
 `
 
 const FavoriteIcon = styled.div`
@@ -154,30 +161,70 @@ const Title = styled.h1`
     @media screen and (max-width: 950px) {
         font-size: 1.5em;
     }
+
+    @media screen and (max-width: 500px) {
+        font-size: 20px;
+    }
 `
 
 // Cart Navbar
 
 const NavCart = () => {
+    const cartQuantity = useSelector(state => state.cart.products.length)
+    const favoriteQuantity = useSelector(state => state.favorites.products.length)
+
+    const isFilled = () => {
+        if ( (cartQuantity !== 0) || (favoriteQuantity !== 0) ) {
+
+            switch (isFilled) {
+                case (cartQuantity !== 0):
+                    return 'filled';
+
+                case (favoriteQuantity !== 0):
+                    return 'filled';
+
+                default:
+                    return 'none';
+            }
+
+        } else {
+            return 'none';
+        }
+    }
+
     return (
         <Container>
             <Video autoPlay loop muted src={Videos} type='video/mp4' />
             <Wrapper>
                 <ButtonWrapper>
-                    <Button>
-                        <ShoppingIcon>
-                            <FiShoppingBag style={{fontSize:'18px', marginLeft:'5px'}} />
-                            <Text>INVENTARIO</Text>
-                        </ShoppingIcon>
-                        <Circle type='filled'>3</Circle>
-                    </Button>
-                    <Button>
-                        <FavoriteIcon>
-                            <MdFavoriteBorder style={{fontSize:'18px', marginLeft:'5px'}} />
-                            <Text>FAVORITOS</Text>
-                        </FavoriteIcon>
-                        <Circle type='none'>0</Circle>
-                    </Button>
+                    <Link to='/cart' style={{textDecoration:'none'}}>
+                        <Button>
+                            <ShoppingIcon>
+                                <AiFillShopping style={{
+                                    fontSize:'16px',
+                                    marginLeft:'5px',
+                                }} />
+                                <Text>INVENTARIO</Text>
+                            </ShoppingIcon>
+                            <StyledBadge badgeContent={cartQuantity} color='success' variant='string' overlap='rectangular'>
+                                <Circle type={isFilled()}>0</Circle>
+                            </StyledBadge>
+                        </Button>
+                    </Link>
+                    <Link to='/favorites' style={{textDecoration:'none'}}>
+                        <Button>
+                            <FavoriteIcon>
+                                <MdFavorite style={{
+                                    fontSize:'16px',
+                                    marginLeft:'5px',
+                                }} />
+                                <Text>FAVORITOS</Text>
+                            </FavoriteIcon>
+                            <StyledBadge badgeContent={favoriteQuantity} color='success' variant='string' overlap='rectangular'>
+                                <Circle type={isFilled()}>0</Circle>
+                            </StyledBadge>
+                        </Button>
+                    </Link>
                 </ButtonWrapper>
                 <TitleWrapper>
                     <Title>MI CARRITO</Title>

@@ -1,0 +1,40 @@
+:focus {
+    outline: none;
+}
+
+.container {
+    width: 400px;
+    padding-bottom: 30px;
+    border-radius: 30px;
+    box-shadow: 1px 2px 4px 2px grey;
+}
+
+.button-confirm {
+    margin: 5px;
+    padding: 12px 30px;
+    background: transparent;
+    color: #d92b3a;
+    border: 3px solid #d92b3a;
+    border-radius: 30px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.button-cancel {
+    margin: 5px;
+    padding: 12px 30px;
+    background: #01bf71;
+    color: #0d0d0d;
+    border: 3px solid #01bf71;
+    border-radius: 30px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.progress-bar {
+    margin: 0 auto;
+    background-color: #01bf71;
+    width: 90%;
+}

@@ -1,11 +1,11 @@
 import React from 'react'
 import Categories from '../components/Categories'
 import Newsletter from '../components/Newsletter'
-import Products from '../components/Products'
 import Slider from '../components/Slider'
 import Clip from '../components/Clip'
 import NavbarHome from '../components/NavbarHome'
 import Footer from '../components/Footer'
+import NavFilters from '../components/NavFilters'
 
 // Structure
 
@@ -15,7 +15,7 @@ const Home = () => {
       <NavbarHome />
       <Clip />
       <Categories />
-      <Products />
+      <NavFilters />
       <Slider />
       <Newsletter />
       <Footer />

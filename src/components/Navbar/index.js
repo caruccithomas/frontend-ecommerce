@@ -4,14 +4,15 @@ import Sidebar from './Sidebar'
 
 const Navbar = ({id}) => {
     const [isOpen, setIsOpen] = useState(false);
+
     const toggle = () => {
-        setIsOpen(!isOpen);
+        setIsOpen((prevState) => !prevState);
     }
 
     return (
         <Fragment>
-            <Sidebar isOpen={isOpen} toggle={toggle} />
             <Nav toggle={toggle} />
+            <Sidebar isOpen={isOpen} />
         </Fragment>
     )
 }

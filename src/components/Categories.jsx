@@ -6,7 +6,7 @@ import { categories } from '../data'
 // Components
 
 const Wrapper = styled.div`
-  padding-top: 100px;
+  padding-top: 76px;
 `
 
 const Container = styled.div`
@@ -68,9 +68,9 @@ export const Categories = () => {
         <Title>NUESTRAS COLECCIONES</Title>
       </TitleContainer>
       <Container>
-          {categories.map(item => (
-            <CategoryItem item={item} key={item.id} />
-          ))}
+        {categories.map(item => (
+          <CategoryItem key={item.id} item={item} />
+        ))}
       </Container>
     </Wrapper>
   )
