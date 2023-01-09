@@ -374,7 +374,7 @@ const Sidebar = ({ isOpen, toggle }) => {
                         </TextLink>
                     </SidebarButton>
                 </SidebarScroll>
-                <SidebarRoute to='/cart/favorites'>
+                <SidebarRoute to='/favorites'>
                     <SidebarButton type='favs'>
                         <MdFavoriteBorder style={{marginLeft:'20px', fontSize:'22px', color:'grey'}} />
                         <TextLink>
