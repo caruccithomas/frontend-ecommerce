@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Link as LinkRouter } from 'react-router-dom'
 import { Link as LinkScroll } from 'react-scroll'
+import { animateScroll as scroll } from 'react-scroll'
 import { useDispatch, useSelector } from 'react-redux'
 import { IoPricetagsOutline, IoNewspaperOutline, IoShirtOutline } from 'react-icons/io5'
 import { RiLoginBoxLine, RiLogoutBoxLine } from 'react-icons/ri'
@@ -240,6 +241,10 @@ const Sidebar = ({ isOpen, toggle }) => {
     const [matchedProducts, setMatchedProducts] = useState([])
     const [open, setOpen] = useState(false)
 
+    const toggleUp = () => {
+        scroll.scrollToTop(); 
+    }
+
     useEffect(() => {
         const loadProducts = async () => {
           try {
@@ -307,7 +312,7 @@ const Sidebar = ({ isOpen, toggle }) => {
                                 matchedProducts.map((item, index) => {
                                     return (
                                         <ProductResults>
-                                            <NavProductLink to={`/product/${item._id}`}>
+                                            <NavProductLink to={`/product/${item._id}`} onClick={toggleUp}>
                                                 <ProductWrapper key={index}>
                                                     <ImgWrapper>
                                                         <Img src={item.img} />

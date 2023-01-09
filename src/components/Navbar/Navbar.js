@@ -400,7 +400,7 @@ const Nav = ({ toggle }) => {
     const [matchedProducts, setMatchedProducts] = useState([])
     const [isOpen, setIsOpen] = useState(false)
 
-    const toggleHome = () => {
+    const toggleUp = () => {
         scroll.scrollToTop(); 
     }
 
@@ -464,7 +464,7 @@ const Nav = ({ toggle }) => {
                         color='black'
                     />
                 </MobileIcon>
-                <NavLogo to='/' onClick={toggleHome}>
+                <NavLogo to='/' onClick={toggleUp}>
                     BRONX
                 </NavLogo>
                 <NavContainer>
@@ -484,7 +484,7 @@ const Nav = ({ toggle }) => {
                                     matchedProducts.map((item, index) => {
                                         return (
                                             <ProductResults>
-                                                <NavProductLink to={`/product/${item._id}`}>
+                                                <NavProductLink to={`/product/${item._id}`} onClick={toggleUp}>
                                                     <ProductWrapper key={index}>
                                                         <ImgWrapper>
                                                             <Img src={item.img} />
@@ -548,10 +548,10 @@ const Nav = ({ toggle }) => {
                     <UserContainer>
                         {!user ? (
                             <NavSign>
-                                <NavSignInLink to='/login' onClick={toggleHome}>
+                                <NavSignInLink to='/login' onClick={toggleUp}>
                                     iniciar sesión
                                 </NavSignInLink>
-                                <NavSignUpLink to='/register' onClick={toggleHome}>
+                                <NavSignUpLink to='/register' onClick={toggleUp}>
                                     registrarse
                                 </NavSignUpLink>
                             </NavSign>
@@ -565,7 +565,7 @@ const Nav = ({ toggle }) => {
                     </UserContainer>
                     <NavCart>
                         {!user ? (
-                            <NavCartLink to='/login' type='user' onClick={toggleHome}>
+                            <NavCartLink to='/login' type='user' onClick={toggleUp}>
                                 <Person style={{fontSize:'20px'}} />
                             </NavCartLink>
                         ) : (
@@ -573,7 +573,7 @@ const Nav = ({ toggle }) => {
                                 <BiLogOut style={{fontSize:'20px'}} />
                             </NavCartLink>
                         )}
-                        <NavCartLink to='/favorites' type='favs' onClick={toggleHome}>
+                        <NavCartLink to='/favorites' type='favs' onClick={toggleUp}>
                             <ThemeProvider theme={theme}>
                                 <Badge badgeContent={favoriteQuantity} color='success' overlap='rectangular' variant='dot'>
                                     <Favorite style={{fontSize: '20px'}} />

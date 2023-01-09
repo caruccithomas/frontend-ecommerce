@@ -419,7 +419,7 @@ const Nav = ({ toggle }) => {
       window.addEventListener('scroll', changeBgNav)
     }, [])
 
-    const toggleHome = () => {
+    const toggleUp = () => {
         scroll.scrollToTop(); 
     }
 
@@ -482,7 +482,7 @@ const Nav = ({ toggle }) => {
                         color={scrollNav ? 'black' : 'white'}
                     />
                 </MobileIcon>
-                <NavLogo to='/' onClick={toggleHome} scrollNav={scrollNav}>
+                <NavLogo to='/' onClick={toggleUp} scrollNav={scrollNav}>
                     BRONX
                 </NavLogo>
                 <NavContainer>
@@ -503,7 +503,7 @@ const Nav = ({ toggle }) => {
                                     matchedProducts.map((item, index) => {
                                         return (
                                             <ProductResults>
-                                                <NavProductLink to={`/product/${item._id}`}>
+                                                <NavProductLink to={`/product/${item._id}`} onClick={toggleUp}>
                                                     <ProductWrapper key={index}>
                                                         <ImgWrapper>
                                                             <Img src={item.img} />
@@ -570,10 +570,10 @@ const Nav = ({ toggle }) => {
                     <UserContainer>
                         {!user ? (
                             <NavSign>
-                                <NavSignInLink to='/login' scrollNav={scrollNav} onClick={toggleHome}>
+                                <NavSignInLink to='/login' scrollNav={scrollNav} onClick={toggleUp}>
                                     iniciar sesión
                                 </NavSignInLink>
-                                <NavSignUpLink to='/register' scrollNav={scrollNav} onClick={toggleHome}>
+                                <NavSignUpLink to='/register' scrollNav={scrollNav} onClick={toggleUp}>
                                     registrarse
                                 </NavSignUpLink>
                             </NavSign>
@@ -587,7 +587,7 @@ const Nav = ({ toggle }) => {
                     </UserContainer>
                     <NavCart>
                         {!user ? (
-                            <NavCartLink to='/login' type='user' scrollNav={scrollNav} onClick={toggleHome}>
+                            <NavCartLink to='/login' type='user' scrollNav={scrollNav} onClick={toggleUp}>
                                 <Person style={{fontSize:'20px'}} />
                             </NavCartLink>
                         ) : (
@@ -595,7 +595,7 @@ const Nav = ({ toggle }) => {
                                 <BiLogOut style={{fontSize:'20px'}} />
                             </NavCartLink>
                         )}
-                        <NavCartLink to='/favorites' type='favs' scrollNav={scrollNav} onClick={toggleHome}>
+                        <NavCartLink to='/favorites' type='favs' scrollNav={scrollNav} onClick={toggleUp}>
                             <ThemeProvider theme={theme}>
                                 <Badge badgeContent={favoriteQuantity} color='success' overlap='rectangular' variant='dot'>
                                     <Favorite style={{fontSize: '20px'}} />
