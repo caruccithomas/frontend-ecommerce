@@ -270,7 +270,6 @@ const NavFilters = () => {
                                 <Option>Vestidos</Option>
                                 <Option>Zapatillas</Option>
                                 <Option>Zapatos</Option>
-                                <Option value='default' hidden>PRODUCTOS</Option>
                             </Select>
                             <Line />
                             <Select name='brand' defaultValue='default' onChange={handleFilters} type='left'>

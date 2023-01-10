@@ -357,9 +357,9 @@ const SizeButton = styled.select`
 `
 
 const FilterSizeButton = styled.option`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
     text-align: center;
 `
 
@@ -588,8 +588,8 @@ const Product = () => {
                                 </Filter>
                             </FilterContainer>
                             <ButtonWrapper>
-                                <SizeButton defaultValue={'default'} onClick={(s) => setSize(s.target.value)} >
-                                    <FilterSizeButton value='default' disabled>ELEGIR TAMAÑO</FilterSizeButton>
+                                <SizeButton defaultValue='default' onClick={(s) => setSize(s.target.value)}>
+                                    <FilterSizeButton value='default' hidden>ELEGIR TAMAÑO</FilterSizeButton>
                                     {product.size !== undefined && product.size.map((s, index) => (
                                         <FilterSizeButton key={index}>{s}</FilterSizeButton>
                                     ))}
