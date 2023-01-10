@@ -591,7 +591,7 @@ const Product = () => {
                                 <SizeButton defaultValue={size}>
                                     <FilterSizeButton value='' hidden>ELEGIR TAMAÑO</FilterSizeButton>
                                     {product.size !== undefined && product.size.map((s, index) => (
-                                        <FilterSizeButton key={index} onClick={(s) => setSize(s)}>{s}</FilterSizeButton>
+                                        <FilterSizeButton key={index} onClick={setSize(s)}>{s}</FilterSizeButton>
                                     ))}
                                 </SizeButton>
                                 <CartButton onClick={handleClick}>AÑADIR AL CARRITO</CartButton>
