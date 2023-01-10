@@ -588,10 +588,10 @@ const Product = () => {
                                 </Filter>
                             </FilterContainer>
                             <ButtonWrapper>
-                                <SizeButton defaultValue={size} onClick={(s) => setSize(s.target.value)}>
+                                <SizeButton defaultValue={size}>
                                     <FilterSizeButton value='' hidden>ELEGIR TAMAÑO</FilterSizeButton>
                                     {product.size !== undefined && product.size.map((s, index) => (
-                                        <FilterSizeButton key={index}>{s}</FilterSizeButton>
+                                        <FilterSizeButton key={index} onClick={(s) => setSize(s)}>{s}</FilterSizeButton>
                                     ))}
                                 </SizeButton>
                                 <CartButton onClick={handleClick}>AÑADIR AL CARRITO</CartButton>
