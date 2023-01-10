@@ -588,8 +588,8 @@ const Product = () => {
                                 </Filter>
                             </FilterContainer>
                             <ButtonWrapper>
-                                <SizeButton defaultValue='default' onClick={(s) => setSize(s.target.value)}>
-                                    <FilterSizeButton value='default' hidden>ELEGIR TAMAÑO</FilterSizeButton>
+                                <SizeButton defaultValue='' onClick={(s) => setSize(s.target.value)}>
+                                    <FilterSizeButton value='' hidden>ELEGIR TAMAÑO</FilterSizeButton>
                                     {product.size !== undefined && product.size.map((s, index) => (
                                         <FilterSizeButton key={index}>{s}</FilterSizeButton>
                                     ))}
