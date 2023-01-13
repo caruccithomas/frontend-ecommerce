@@ -211,7 +211,7 @@ const NavFav = () => {
                             </StyledBadge>
                         </Button>
                     </Link>
-                    <Link to='/cart/favorites' style={{textDecoration:'none'}}>
+                    <Link to='/favorites' style={{textDecoration:'none'}}>
                         <Button>
                             <FavoriteIcon>
                                 <MdFavorite style={{
