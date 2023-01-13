@@ -46,7 +46,7 @@ const Wrapper = styled.div`
         margin: 20px;
     }
 
-    @media only screen and (max-width: 680px) {
+    @media only screen and (max-width: 800px) {
         height: 100%;
         flex-direction: column;
         justify-content: flex-start;
@@ -88,8 +88,6 @@ const Gallery = styled.div`
 
 const ImageContainer = styled.div`
     border-radius: 20px;
-    border: 1px solid white;
-    box-shadow: 1px 1px 4px 1px lightgrey;
     transition: all 0.5s ease-in-out;
     cursor: pointer;
 
@@ -123,9 +121,10 @@ const InfoContainer = styled.div`
     background-color: #fff;
     box-shadow: 1px 2px 8px 2px lightgrey;
 
-    @media only screen and (max-width: 680px) {
-        height: auto;
+    @media only screen and (max-width: 800px) {
+        height: 100%;
         min-height: auto;
+        align-items: center;
         justify-content: flex-start;
         margin: 10px auto;
     }
@@ -165,10 +164,11 @@ const FavWrapper = styled.div`
     width: 55px;
     height: 32px;
     padding-right: ${props => props.type === 'added' ? '8px' : '0'};
-    background: ${props => props.type === 'added' ? '#01bf74' : '#fff'};
+    background: ${props => props.type === 'added' ? '#01bf74' : 'whitesmoke'};
     color: #0d0d0d;
     border-radius: 30px;
-    box-shadow: ${props => props.type === 'added' ? 'none' : '1px 2px 4px 2px lightgrey inset'};
+    box-shadow: 1px 1px 4px 1px darkgrey;
+    cursor: pointer;
     transition: all 0.5s ease-in-out;
     z-index: 3;
 `
@@ -249,20 +249,19 @@ const Price = styled.span`
 `
 
 const Description = styled.p`
-    margin: 20px 0;
+    margin-top: 20px;
     min-height: auto;
     overflow-y: scroll;
     text-align: justify;
-    font-size: 16px;
+    font-size: 15px;
     transition: all 0.5s ease-in-out;
 
-    @media screen and (max-width: 1050px) {
-        font-size: 15px;
+    @media screen and (max-width: 950px) {
+        font-size: 14px;
     }
 
-    @media screen and (max-width: 870px) {
-        font-size: 14px;
-        margin-bottom: 0;
+    @media screen and (max-width: 680px) {
+        font-size: 13px;
     }
 
     @media only screen and (max-width: 320px) {
@@ -275,7 +274,7 @@ const FilterContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 30px 0;
+    margin-top: 20px;
 
     @media only screen and (max-width: 320px) {
         flex-direction: column;
@@ -327,13 +326,53 @@ const Amount = styled.span`
     }
 `
 
-const ButtonWrapper = styled.div`
+const ButtonContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    row-gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+
+    @media only screen and (max-width: 950px) {
+        margin-bottom: 40px;
+    }
+`
+
+const SizeTitleMobile = styled.h2`
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 1px 0px 6px 1px darkgrey;
+    text-shadow: 1px 1px 6px lightgrey;
+    background: rgb(226,226,226);
+    background: linear-gradient(90deg, rgba(226,226,226,1) 0%, rgba(245,245,245,1) 15%, rgba(255,255,255,1) 50%, rgba(244,244,244,1) 85%, rgba(226,226,226,1) 100%);
+    color: #0d0d0d;
+    width: 100%;
+    padding: 8px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    z-index: 1;
+
+    @media only screen and (max-width: 950px) {
+        display: flex;
+    }
+
+    @media screen and (max-width: 680px) {
+        font-size: 12px;
+    }
+
+    @media screen and (max-width: 380px) {
+        font-size: 10px;
+    }
+
+    @media screen and (max-width: 320px) {
+        font-size: 9px;
+    }
 `
 
 const SizeButton = styled.select`
@@ -352,7 +391,11 @@ const SizeButton = styled.select`
     -moz-appearance: none;
 
     @media only screen and (max-width: 1450px) {
-        height: 30px;
+        // height: 30px;
+    }
+
+    @media screen and (max-width: 950px) {
+        display: none;
     }
 `
 
@@ -363,14 +406,54 @@ const FilterSizeButton = styled.option`
     text-align: center;
 `
 
+const SizeButtonMobile = styled.div`
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px;
+    box-shadow: 1px 1px 8px 1px darkgrey;
+    background: #f8f8f8;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-sizing: border-box;
+    gap: 15px;
+
+    @media only screen and (max-width: 950px) {
+        display: flex;
+    }
+
+    @media screen and (max-width: 320px) {
+        padding: 10px;
+        gap: 10px;
+    }
+`
+
+const FilterSizeButtonMobile = styled.span`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: #fff;
+    color: #000;
+    font-size: 15px;
+    padding: 6px;
+    border: 1px solid grey;
+    border-radius: 30px;
+    text-decoration: none;
+    // box-shadow: 1px 1px 2px 2px darkgrey;
+    cursor: pointer;
+`
+
 const CartButton = styled.button`
     width: 100%;
-    height: 40px;
+    min-height: 40px;
     border-radius: 30px;
     background-color: #0d0d0d;
     border: none;
     color: #fff;
     font-weight: 600;
+    letter-spacing: 1px;
     cursor: pointer;
     box-shadow: 1px 2px 10px 2px grey;
 
@@ -384,11 +467,11 @@ const CartButton = styled.button`
 
 const Product = () => {
     const location = useLocation()
-    const ref = useRef(null)
+    const colorRef = useRef(null)
+    const sizeRef = useRef(null)
     const id = location.pathname.split('/')[2]
     const favorites = useSelector((state) => state.favorites)
     const [product, setProduct] = useState({})
-    // const [isSelected, setIsSelected] = useState(false)
     const [quantity, setQuantity] = useState(1)
     const [color, setColor] = useState('')
     const [size, setSize] = useState('')
@@ -419,28 +502,54 @@ const Product = () => {
         setModel(true);
     }
 
-    const handleToggleClassListRef = (ref) => {
+    const handleColorClassListRef = (ref) => {
         
-        if (!ref.current) {
+        if (!colorRef.current) {
             return
         }
 
-        if (!ref.current.classList.contains('big-border')) {
-            ref.current.classList.add('big-border')
-        } else {
-            ref.current.classList.remove('big-border')
-            ref.current = null
+        if (!colorRef.current.classList.contains('border-color')) {
+            colorRef.current.classList.add('border-color')
+        } else if (colorRef.current.classList.contains('border-color')) {
+            colorRef.current.classList.remove('border-color')
+            colorRef.current = null
+        }
+        
+    }
+
+    const handleSizeClassListRef = (ref) => {
+        
+        if (!sizeRef.current) {
+            return
+        }
+
+        if (!sizeRef.current.classList.contains('border-size')) {
+            sizeRef.current.classList.add('border-size')
+        } else if (sizeRef.current.classList.contains('border-size')) {
+            sizeRef.current.classList.remove('border-size')
+            sizeRef.current = null
         }
 
     }
 
-    const handleRefEvent = (event) => {
+    const handleColorRef = (event) => {
+        event.preventDefault()
         event.stopPropagation()
-        ref.current = event.target
+        colorRef.current = event.target
+    }
+
+    const handleSizeRef = (event) => {
+        event.preventDefault()
+        event.stopPropagation()
+        sizeRef.current = event.target
     }
 
     const handleColor = (choice) => {
         setColor(choice)
+    }
+
+    const handleSize = (choice) => {
+        setSize(choice)
     }
 
     const handleQuantity = (type) => {
@@ -567,9 +676,9 @@ const Product = () => {
                                         return (
                                             <FilterColor color={'#' + c} key={index} onClick={(event) => {
                                                 handleColor(c)
-                                                handleToggleClassListRef(ref)
-                                                handleRefEvent(event)
-                                                handleToggleClassListRef(ref)
+                                                handleColorClassListRef(colorRef)
+                                                handleColorRef(event)
+                                                handleColorClassListRef(colorRef)
                                             }} />
                                         )
                                     })}
@@ -587,15 +696,46 @@ const Product = () => {
                                     </AmountContainer>
                                 </Filter>
                             </FilterContainer>
-                            <ButtonWrapper>
-                            <SizeButton defaultValue={size} onClick={(s) => setSize(s.target.value)}>
-                                    <FilterSizeButton value='' hidden>ELEGIR TAMAÑO</FilterSizeButton>
-                                    {product.size !== undefined && product.size.map((s, index) => (
-                                        <FilterSizeButton key={index} value={s}>{s}</FilterSizeButton>
-                                    ))}
+                            <ButtonContainer>
+                                <SizeTitleMobile>
+                                    SELECCIONA UN TAMAÑO
+                                </SizeTitleMobile>
+                                <SizeButton defaultValue={size} onClick={(s) => setSize(s.target.value)}>
+                                    <FilterSizeButton value='' hidden>
+                                        SELECCIONA UN TAMAÑO
+                                    </FilterSizeButton>
+                                    {product.size !== undefined && product.size.map((s, index) => {
+                                        return (
+                                            <FilterSizeButton key={index} value={s}>
+                                                {s}
+                                            </FilterSizeButton>
+                                        )
+                                    })}
                                 </SizeButton>
-                                <CartButton onClick={handleClick}>AÑADIR AL CARRITO</CartButton>
-                            </ButtonWrapper>
+                                <SizeButtonMobile>
+                                    {product.size !== undefined && product.size.map((s, index) => {
+                                        return (
+                                            <FilterSizeButtonMobile key={index} value={s} onClick={(event) => {
+                                                handleSize(s)
+                                                handleSizeClassListRef(sizeRef)
+                                                handleSizeRef(event)
+                                                handleSizeClassListRef(sizeRef)
+                                            }}>
+                                                {s}
+                                            </FilterSizeButtonMobile>
+                                        )
+                                        // return (
+                                        //     <FilterColor color={'#' + c} key={index} onClick={(event) => {
+                                        //         handleColor(c)
+                                        //         handleToggleClassListRef(ref)
+                                        //         handleRefEvent(event)
+                                        //         handleToggleClassListRef(ref)
+                                        //     }} />
+                                        // )
+                                    })}
+                                </SizeButtonMobile>
+                            </ButtonContainer>
+                            <CartButton onClick={handleClick}>AÑADIR AL CARRITO</CartButton>
                         </Info>
                     </InfoContainer>
                 </Wrapper>

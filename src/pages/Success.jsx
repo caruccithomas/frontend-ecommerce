@@ -7,6 +7,7 @@ import { removeCart } from '../redux/cartRedux'
 import { userRequest } from "../requestMethods";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ScrollToTop from '../components/Effects/ScrollToTop';
 import { Cancel, CheckCircle } from "@material-ui/icons";
 
 // Components
@@ -146,6 +147,7 @@ const Success = () => {
     <>
       <Navbar />
       <Container>
+        <ScrollToTop />
         {orderId && (
           <Wrapper>
             <Icon type='check'>

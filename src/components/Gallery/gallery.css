@@ -53,6 +53,10 @@
 
 /* Selected Color */
 
-.big-border {
-    box-shadow: 1px 1px 6px 2px #aaa;
+.border-color {
+    box-shadow: 1px 1px 6px 2px grey;
+}
+
+.border-size {
+    box-shadow: 1px 1px 8px 1px grey;
 }

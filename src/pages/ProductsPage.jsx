@@ -110,7 +110,7 @@ const Filter = styled.div`
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 8px;
+    padding: 6px;
     width: 100%;
     color: #0d0d0d;
     background-color: #fff;
@@ -119,7 +119,7 @@ const Filter = styled.div`
     @media only screen and (max-width: 1000px) {
         display: flex;
         width: 100%;
-        box-shadow: 0px 1px 5px lightgrey;
+        box-shadow: 1px 1px 4px darkgrey;
         border-radius: 50px;
         border: 1px solid lightgrey;
         background: #f8f8f8;
@@ -149,7 +149,7 @@ const SelectWrapper = styled.div`
     background: #f8f8f8;
     padding: 8px;
     border-radius: 30px;
-    box-shadow: 1px 1px 8px 2px lightgrey;
+    box-shadow: 1px 1px 4px 1px darkgrey;
 
     @media only screen and (max-width: 1000px) {
         width: 100%;

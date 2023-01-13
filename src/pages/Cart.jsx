@@ -365,6 +365,7 @@ const Button = styled.button`
     font-weight: 700;
     cursor: pointer;
     border: 1.6px solid #0D0D0D;
+    color: #000;
     border-radius: 50px;
     background-color: ${props => props.type === 'filled' ? '#0D0D0D' : 'white'};
     color: ${props => props.type === 'filled' && 'white'};
@@ -479,6 +480,7 @@ const DiscountButton = styled.button`
     letter-spacing: 2px;
     transition: all 0.2s ease-in-out;
     text-shadow: 1px 1px 1px grey;
+    color: #000;
     cursor: pointer;
 
     &:hover {

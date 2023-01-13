@@ -62,12 +62,12 @@ const SliderWrapper = styled.div`
     position: relative;
     padding: 10px;
     margin-bottom: 8px;
-    border-left: 1px solid lightgrey;
-    border-right: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
+    border-left: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    box-shadow: 1px 1px 12px 1px lightgrey;
+    box-shadow: 1px 1px 10px 1px #dcdcdc;
 
     @media only screen and (max-width: 950px) {
         margin-bottom: 70px;
@@ -154,7 +154,7 @@ const Carousel = ({ categories }) => {
                     style={{
                         width: '100%',
                         backgroundColor: "#fff",
-                        boxShadow: '1px 2px 8px 2px lightgrey',
+                        boxShadow: '1px 2px 8px 2px #c0c0c0',
                         borderRadius: '30px',
                         padding: '6px',
                         marginBottom: '30px',

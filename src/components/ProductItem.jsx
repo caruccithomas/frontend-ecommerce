@@ -102,10 +102,10 @@ const FavWrapper = styled.div`
     width: 55px;
     height: 32px;
     padding-right: ${props => props.type === 'added' ? '8px' : '0'};
-    background: ${props => props.type === 'added' ? '#01bf74' : '#fff'};
+    background: ${props => props.type === 'added' ? '#01bf74' : '#f8f8f8'};
     color: #0d0d0d;
     border-radius: 30px;
-    box-shadow: ${props => props.type === 'added' ? 'none' : '1px 2px 4px 2px lightgrey inset'};
+    box-shadow: 1px 1px 4px 1px darkgrey;
     transition: all 0.5s ease-in-out;
     z-index: 3;
 `
@@ -132,7 +132,7 @@ const Brand = styled.div`
     z-index: 3;
     color: grey;
     background: #f8f8f8;
-    box-shadow: 1px 1px 8px 1px lightgrey;
+    box-shadow: 1px 1px 4px 1px darkgrey;
     border-radius: 25px;
     letter-spacing: 1px;
     transition: all 0.5s ease-in-out;
