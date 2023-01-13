@@ -9,6 +9,7 @@ import ScrollToTop from './components/Effects/ScrollToTop';
 import ProductsPage from './pages/ProductsPage';
 import Success from './pages/Success';
 import Favorites from './pages/Favorites';
+import Privacy from './pages/Privacy';
 
 const Cart = React.lazy(() => import('./pages/Cart'));
 const Home = React.lazy(() => import('./pages/Home'));
@@ -74,6 +75,7 @@ const App = () => {
           </React.Suspense>
         } />
         <Route path='/success' element={<Success />} />
+        <Route path='/privacy' element={<Privacy />} />
         <Route path='/*' element={<Navigate to='/' />} />
       </Routes>
     </Router>

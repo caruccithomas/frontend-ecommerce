@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 // Components
 
@@ -59,11 +60,16 @@ const Wrapper = styled.ul`
 
 const Title = styled.li`
     font-size: 14px;
-    cursor: pointer;
 
     @media only screen and (max-width: 340px) {
         font-size: 12px;
     }
+`
+
+const LinkRouter = styled(Link)`
+    text-decoration: none;
+    color: #adadad;
+    cursor: pointer;
 `
 
 // Foot Extension
@@ -79,13 +85,19 @@ const BottomFooter = () => {
                 <NavWrapper>
                     <Wrapper>
                         <Title>
-                            Privacidad
+                            <LinkRouter to='/privacy'>
+                                Privacidad
+                            </LinkRouter>
                         </Title>
                         <Title>
-                            Accesibilidad
+                            <LinkRouter to='/privacy'>
+                                Accesibilidad
+                            </LinkRouter>
                         </Title>
                         <Title>
-                            Condiciones
+                            <LinkRouter to='/privacy'>
+                                Condiciones
+                            </LinkRouter>
                         </Title>
                     </Wrapper>
                 </NavWrapper>
