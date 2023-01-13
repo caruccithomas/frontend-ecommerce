@@ -593,6 +593,8 @@ const Cart = () => {
                 cancelButtonText: 'CANCELAR',
                 padding: '40px 20px',
                 customClass: {
+                    container: 'container',
+                    htmlContainer: 'container',
                     popup: 'container',
                     confirmButton: 'button-confirm',
                     cancelButton: 'button-cancel',
