@@ -25,9 +25,10 @@
     padding: 15px 0;
     min-width: 450px;
     max-width: 450px;
-    min-height: 40px;
+    min-height: 30px;
     max-height: auto;
     border-radius: 10px;
+    box-shadow: 1px 1px 3px 1px grey;
     transition: all 0.3s ease-in-out;
   }
   
@@ -118,10 +119,10 @@
   
   @media only screen and (max-width: 470px) {
     #toast {
-      bottom: 0;
+      bottom: 12px;
     }
     .toast {
-      min-width: 100%;
-      border-radius: 0;
+      min-width: 94%;
+      max-width: 94%;
     }
   }

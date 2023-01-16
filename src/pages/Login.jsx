@@ -1,14 +1,13 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link as LinkRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { login, register } from '../redux/apiCalls'
+import { login } from '../redux/apiCalls'
 import { reset } from '../redux/userRedux'
 import Notification from '../components/Notification'
 import { BsPerson, BsKey } from 'react-icons/bs'
 import { FcGoogle } from 'react-icons/fc'
 import Videos from '../videos/horizontal/video_10.mp4'
-import Footer from '../components/Footer'
 import { useGoogleLogin } from '@react-oauth/google'
 import axios from "axios"
 import { publicRequest } from '../requestMethods'
@@ -26,6 +25,7 @@ const Container = styled.div`
 const BackgroundClip = styled.div`
     display: flex;
     position: absolute;
+    background-color: black;
     top: 0;
     right: 0;
     bottom: 0;
@@ -39,7 +39,7 @@ const Video = styled.video`
     display: flex;
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     -o-object-fit: cover;
     object-fit: cover;
 `
@@ -362,36 +362,47 @@ const Login = () => {
 
     const signWithGoogle = useGoogleLogin({
         onSuccess: async (res) => {
-            try {
-                const tokenRes = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-                    headers: {
-                        "Authorization": `Bearer ${res.access_token}`
-                    }
-                })
-
-                // Create account in Database
-
-                if (tokenRes.data.email_verified === true) {
-                    let user = {
-                        username: tokenRes.data.name,
-                        email: tokenRes.data.email,
-                        password: tokenRes.data.sub,
-                    }
-                
-                    if (!user) {
-                        const registerRes = await publicRequest.post("/authentication/register", user)
-                        user && register(dispatch, {...registerRes, user})
-                    }
-
-                    if (user) {
-                        await publicRequest.post('/authentication/login', user)
-                        user && login(dispatch, user)
-                    }
+        
+        try {
+            const tokenRes = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+                headers: {
+                    "Authorization": `Bearer ${res.access_token}`
                 }
-            } catch (err) {
-                console.dir(err)
+            })
+
+            // Create account in Database
+
+            if (tokenRes.data?.email_verified === true) {
+                let user = {
+                    username: tokenRes.data.name,
+                    email: tokenRes.data.email,
+                    password: tokenRes.data.sub,
+                }
+                const checkUserExists = await publicRequest.get("/authentication/check-username/" + user.username);
+
+                if (checkUserExists.data === 'Usuario creado exitosamente') {
+                    const registerRes = await publicRequest.post("/authentication/register", user)
+                    console.log(registerRes.data)
+                    user = null
+                    user = {...registerRes.data, password: tokenRes.data.sub}
+                    console.log(user)
+                    user && login(dispatch, user)
+                }
+
+                if (checkUserExists.data === 'El usuario ingresado ya existe') {
+                    const loginRes = await publicRequest.post("/authentication/login", user)
+                    user = null
+                    user = loginRes.data
+                    user && login(dispatch, user)
+                }
+            } else {
+                setNotifyMes('El email ingresado no pudo autorizarse. Inténtelo nuevamente');
+                setNotifyType('warning');
+                setNotifyTitle('Advertencia');   
             }
-        }
+        } catch (err) {
+            console.dir(err)
+        }}
     })
 
     const handleClick = () => {
@@ -401,70 +412,67 @@ const Login = () => {
     }
 
     return (
-        <Fragment>
-            <Container>
-                <BackgroundClip>
-                    <Video autoPlay loop muted src={Videos} type='video/mp4' />
-                </BackgroundClip>
-                <Notification 
-                    title={notifyTitle}
-                    message={notifyMes}
-                    type={notifyType}
-                />    
-                <NavLogo to='/'> 
-                    <Text>BRONX</Text>
-                    <LogoText>boutique</LogoText>
-                </NavLogo>
-                <Wrapper>
-                    <Title>Iniciar Sesión</Title>
-                    <Form>
-                        <InputsWrapper>
-                            <InputContainer>
-                                <BsPerson style={{fontSize:'20px', marginRight:'5px'}} />
-                                <Input
-                                    placeholder="nombre de usuario" id='username' required
-                                    onChange={(e) => setUsername(e.target.value)}
-                                />
-                            </InputContainer>
-                            <InputContainer>
-                                <BsKey style={{fontSize:'20px', marginRight:'5px'}} />
-                                <Input
-                                    placeholder="contraseña" required
-                                    type='password'
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </InputContainer>
-                        </InputsWrapper>
-                        <LinkContainer>
-                            <LinkText>
-                                <Link direction='left' to='' onClick={handleClick}>Olvidé mi Contraseña</Link>
-                            </LinkText>
-                            <LinkText type='mobile'>
-                                ¿No tienes cuenta?
-                                <Link direction='right' to='/register'> Crea una ahora</Link>
-                            </LinkText>
-                        </LinkContainer>
-                        <Button onClick={handleLogin} disabled={isFetching}>INGRESAR</Button>
-                        <Line>
-                            <LineText>O PODRÍAS</LineText>
-                        </Line>
-                        <ButtonGoogle onClick={signWithGoogle}>
-                            <FcGoogle style={{fontSize:18}} />
-                            <ButtonText>
-                                Continuar con Google
-                            </ButtonText>
-                        </ButtonGoogle>
-                        <ButtonGoogleMobile onClick={signWithGoogle}>
-                            <FcGoogle style={{fontSize:18}} />
-                            <ButtonText>
-                                CONECTAR
-                            </ButtonText>
-                        </ButtonGoogleMobile>
-                    </Form>
-                </Wrapper>
-            </Container>
-            <Footer />
-        </Fragment>
+        <Container>
+            <BackgroundClip>
+                <Video autoPlay loop muted src={Videos} type='video/mp4' />
+            </BackgroundClip>
+            <Notification 
+                title={notifyTitle}
+                message={notifyMes}
+                type={notifyType}
+            />    
+            <NavLogo to='/'> 
+                <Text>BRONX</Text>
+                <LogoText>boutique</LogoText>
+            </NavLogo>
+            <Wrapper>
+                <Title>Iniciar Sesión</Title>
+                <Form>
+                    <InputsWrapper>
+                        <InputContainer>
+                            <BsPerson style={{fontSize:'20px', marginRight:'5px'}} />
+                            <Input
+                                placeholder="nombre de usuario" id='username' required
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                        </InputContainer>
+                        <InputContainer>
+                            <BsKey style={{fontSize:'20px', marginRight:'5px'}} />
+                            <Input
+                                placeholder="contraseña" required
+                                type='password'
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </InputContainer>
+                    </InputsWrapper>
+                    <LinkContainer>
+                        <LinkText>
+                            <Link direction='left' to='' onClick={handleClick}>Olvidé mi Contraseña</Link>
+                        </LinkText>
+                        <LinkText type='mobile'>
+                            ¿No tienes cuenta?
+                            <Link direction='right' to='/register'> Crea una ahora</Link>
+                        </LinkText>
+                    </LinkContainer>
+                    <Button onClick={handleLogin} disabled={isFetching}>INGRESAR</Button>
+                    <Line>
+                        <LineText>O PODRÍAS</LineText>
+                    </Line>
+                    <ButtonGoogle onClick={signWithGoogle}>
+                        <FcGoogle style={{fontSize:18}} />
+                        <ButtonText>
+                            Continuar con Google
+                        </ButtonText>
+                    </ButtonGoogle>
+                    <ButtonGoogleMobile onClick={signWithGoogle}>
+                        <FcGoogle style={{fontSize:18}} />
+                        <ButtonText>
+                            CONECTAR
+                        </ButtonText>
+                    </ButtonGoogleMobile>
+                </Form>
+            </Wrapper>
+        </Container>
     )
 }
 

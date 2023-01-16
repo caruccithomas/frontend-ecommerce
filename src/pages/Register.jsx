@@ -1,17 +1,17 @@
-import { Fragment, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link as LinkRouter, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { login, register } from '../redux/apiCalls'
 import { reset } from '../redux/userRedux'
-import Footer from '../components/Footer'
 import Notification from '../components/Notification'
 import SVGImage from '../images/svg/svg_01.svg'
 import { useGoogleLogin } from '@react-oauth/google'
 import { FcGoogle } from 'react-icons/fc'
 import axios from "axios"
 import { publicRequest } from '../requestMethods'
-import { BsKey } from 'react-icons/bs'
+import { BsPerson, BsKey } from 'react-icons/bs'
+import { MdOutlineAlternateEmail, MdLockOutline } from 'react-icons/md'
 
 const Container = styled.div`
     display: flex;
@@ -115,6 +115,13 @@ const InputContainer = styled.div`
     border-radius: 25px;
 `
 
+const IconWrapper = styled.div`
+    display: flex;
+    margin-right: 5px;
+    font-size: 20px;
+    color: #555;
+`
+
 const Input = styled.input`
     flex: 1;
     min-width: 40%;
@@ -125,6 +132,11 @@ const Input = styled.input`
     color: grey;
     border-radius: 25px;
     border: none;
+
+    @media only screen and (max-width: 320px) {
+        padding-left: 4px;
+        width: 150px;
+    }
 `
 
 const TextWrapper = styled.div`
@@ -430,128 +442,144 @@ const Register = () => {
 
     const signWithGoogle = useGoogleLogin({
         onSuccess: async (res) => {
-            try {
-                const tokenRes = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-                    headers: {
-                        "Authorization": `Bearer ${res.access_token}`
-                    }
-                })
-
-                // Create account in Database
-
-                if (tokenRes.data.email_verified === true) {
-                    let user = {
-                        username: tokenRes.data.name,
-                        email: tokenRes.data.email,
-                        password: tokenRes.data.sub,
-                    }
-                
-                    if (!user) {
-                        const registerRes = await publicRequest.post("/authentication/register", user)
-                        user && register(dispatch, {...registerRes, user})
-                    }
-
-                    if (user) {
-                        await publicRequest.post('/authentication/login', user)
-                        user && login(dispatch, user)
-                    }
+        
+        try {
+            const tokenRes = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+                headers: {
+                    "Authorization": `Bearer ${res.access_token}`
                 }
-            } catch (err) {
-                console.dir(err)
+            })
+
+            // Create account in Database
+
+            if (tokenRes.data?.email_verified === true) {
+                let user = {
+                    username: tokenRes.data.name,
+                    email: tokenRes.data.email,
+                    password: tokenRes.data.sub,
+                }
+                const checkUserExists = await publicRequest.get("/authentication/check-username/" + user.username);
+
+                if (checkUserExists.data === 'Usuario creado exitosamente') {
+                    const registerRes = await publicRequest.post("/authentication/register", user)
+                    console.log(registerRes.data)
+                    user = null
+                    user = {...registerRes.data, password: tokenRes.data.sub}
+                    console.log(user)
+                    user && login(dispatch, user)
+                }
+
+                if (checkUserExists.data === 'El usuario ingresado ya existe') {
+                    const loginRes = await publicRequest.post("/authentication/login", user)
+                    user = null
+                    user = loginRes.data
+                    user && login(dispatch, user)
+                }
+            } else {
+                setNotifyMes('El email ingresado no pudo autorizarse. Inténtelo nuevamente');
+                setNotifyType('warning');
+                setNotifyTitle('Advertencia');   
             }
-        }
+        } catch (err) {
+            console.dir(err)
+        }}
     })
     
     return (
-        <Fragment>
+        <Container>
             <Notification 
                 title={notifyTitle}
                 message={notifyMes}
                 type={notifyType}
                 duration={8000}
             />
-            <Container>
-                <LeftWrapper>
-                    <Wrapper>
-                        <Form>
-                            <Title>Crear una Cuenta</Title>
-                            <Text>Registrate y recibe las mejores marcas en tu casa desde cualquier parte del País</Text>
-                            <InputContainer>
-                            <BsKey style={{fontSize:'20px', marginRight:'5px'}} />
-                                <Input placeholder="nombre de usuario" type='text' id='username' required value={username}
-                                    onChange={
-                                        (e) => setUsername(e.target.value)
-                                    }
-                                    onClick={()=>{suggest('username')}}                        
-                                />
-                            </InputContainer>
-                            <InputContainer>
-                            <BsKey style={{fontSize:'20px', marginRight:'5px'}} />
-                                <Input placeholder="correo electrónico" type="email" required value={email}
-                                    onChange={
-                                        (e) => setEmail(e.target.value)
-                                    }  
-                                    onClick={()=>{suggest('email')}}                      
-                                />
-                            </InputContainer>
-                            <InputContainer>
-                                <BsKey style={{fontSize:'20px', marginRight:'5px'}} />
-                                <Input placeholder="contraseña" type="password" required value={password}
-                                    onChange={
-                                        (e) => setPassword(e.target.value)
-                                    }
-                                    onClick={()=>{suggest('password')}}                        
-                                />
-                            </InputContainer>
-                            <InputContainer>
-                            <BsKey style={{fontSize:'20px', marginRight:'5px'}} />
-                                <Input placeholder="confirmar contraseña" type="password" required value={confirmPassword}
-                                    onChange={
-                                        (e) => setConfirmPassword(e.target.value)
-                                    }
-                                    onClick={()=>{suggest('conPassword')}}                        
-                                />
-                            </InputContainer>
-                            <TextWrapper>
-                                <Agreement>
-                                    Al crear una cuenta, doy mi consentimiento para el 
-                                    procesamiento de mis datos personales de acuerdo 
-                                    con la <b onClick={handleClick} style={{cursor:'pointer', letterSpacing:'0.5px'}}>Política de Privacidad</b>
-                                </Agreement>
-                                <InfoWrapper>
-                                    <Info>
-                                        ¿Ya tienes una cuenta?
-                                    </Info>
-                                    <Link to='/login'>
-                                        Inicia sesión
-                                    </Link>
-                                </InfoWrapper>
-                            </TextWrapper>
-                            <Button onClick={handleRegister} disabled={isFetching}>REGISTRARSE</Button>
-                            <Line>
-                                <LineText>O PODRÍAS</LineText>
-                            </Line>
-                            <ButtonGoogle onClick={signWithGoogle}>
-                                <FcGoogle style={{fontSize:18}} />
-                                <ButtonText>
-                                    Continuar con Google
-                                </ButtonText>
-                            </ButtonGoogle>
-                            <ButtonGoogleMobile onClick={signWithGoogle}>
-                                <FcGoogle style={{fontSize:18}} />
-                                <ButtonText>
-                                    CONECTARSE
-                                </ButtonText>
-                            </ButtonGoogleMobile>
-                        </Form>
-                    </Wrapper>
-                </LeftWrapper>
-                <RightWrapper>
-                    <Image src={SVGImage} />
-                </RightWrapper>
-            </Container>
-            <Footer />
-        </Fragment>
+            <LeftWrapper>
+                <Wrapper>
+                    <Form>
+                        <Title>Crear una Cuenta</Title>
+                        <Text>Registrate y recibe las mejores marcas en tu casa desde cualquier parte del País</Text>
+                        <InputContainer>
+                            <IconWrapper>
+                                <BsPerson />
+                            </IconWrapper>
+                            <Input placeholder="nombre de usuario" type='text' id='username' required value={username}
+                                onChange={
+                                    (e) => setUsername(e.target.value)
+                                }
+                                onClick={()=>{suggest('username')}}
+                            />
+                        </InputContainer>
+                        <InputContainer>
+                            <IconWrapper>
+                                <MdOutlineAlternateEmail />
+                            </IconWrapper>
+                            <Input placeholder="correo electrónico" type="email" id='email' required value={email}
+                                onChange={
+                                    (e) => setEmail(e.target.value)
+                                }  
+                                onClick={()=>{suggest('email')}}                      
+                            />
+                        </InputContainer>
+                        <InputContainer>
+                            <IconWrapper>
+                                <BsKey />
+                            </IconWrapper>
+                            <Input placeholder="contraseña" type="password" id='password' required value={password}
+                                onChange={
+                                    (e) => setPassword(e.target.value)
+                                }
+                                onClick={()=>{suggest('password')}}                        
+                            />
+                        </InputContainer>
+                        <InputContainer>
+                            <IconWrapper>
+                                <MdLockOutline />
+                            </IconWrapper>
+                            <Input placeholder="confirmar contraseña" type="password" id='password' required value={confirmPassword}
+                                onChange={
+                                    (e) => setConfirmPassword(e.target.value)
+                                }
+                                onClick={()=>{suggest('conPassword')}}                        
+                            />
+                        </InputContainer>
+                        <TextWrapper>
+                            <Agreement>
+                                Al crear una cuenta, doy mi consentimiento para el 
+                                procesamiento de mis datos personales de acuerdo 
+                                con la <b onClick={handleClick} style={{cursor:'pointer', letterSpacing:'0.5px'}}>Política de Privacidad</b>
+                            </Agreement>
+                            <InfoWrapper>
+                                <Info>
+                                    ¿Ya tienes una cuenta?
+                                </Info>
+                                <Link to='/login'>
+                                    Inicia sesión
+                                </Link>
+                            </InfoWrapper>
+                        </TextWrapper>
+                        <Button onClick={handleRegister} disabled={isFetching}>REGISTRARSE</Button>
+                        <Line>
+                            <LineText>O PODRÍAS</LineText>
+                        </Line>
+                        <ButtonGoogle onClick={signWithGoogle}>
+                            <FcGoogle style={{fontSize:18}} />
+                            <ButtonText>
+                                Continuar con Google
+                            </ButtonText>
+                        </ButtonGoogle>
+                        <ButtonGoogleMobile onClick={signWithGoogle}>
+                            <FcGoogle style={{fontSize:18}} />
+                            <ButtonText>
+                                CONECTARSE
+                            </ButtonText>
+                        </ButtonGoogleMobile>
+                    </Form>
+                </Wrapper>
+            </LeftWrapper>
+            <RightWrapper>
+                <Image src={SVGImage} />
+            </RightWrapper>
+        </Container>
     )
 }
 

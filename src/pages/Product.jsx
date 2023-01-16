@@ -562,19 +562,19 @@ const Product = () => {
 
     };
 
-    const handleClick = () => {
+    const handleClick = (c) => {
+
         if (color === '' || size === '') {
             if (!color) {
                 setNotifyMes('Selecciona un color específico')
                 setNotifyType('error')
                 setNotifyTitle('Campo Indefinido')
-                return;
             }
+
             if (!size) {
                 setNotifyMes('Selecciona un tamaño específico')
                 setNotifyType('error')
                 setNotifyTitle('Campo Indefinido')
-                return;
             }
         } else {
             dispatch (
@@ -590,6 +590,7 @@ const Product = () => {
             setNotifyType('success')
             setNotifyTitle('¡Completado!')
         }
+        
     }
 
     const handleEvent = (event) => {
@@ -627,6 +628,7 @@ const Product = () => {
                     title={notifyTitle}
                     message={notifyMes}
                     type={notifyType}
+                    duration={7500}
                 />
                 <Wrapper>
                     <ImgContainer>

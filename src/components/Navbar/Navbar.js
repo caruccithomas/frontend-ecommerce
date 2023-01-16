@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, Fragment } from 'react'
 import styled from 'styled-components'
 import { publicRequest } from '../../requestMethods'
 import { Link as LinkRouter } from 'react-router-dom'
@@ -11,18 +11,10 @@ import { Badge } from '@mui/material'
 import Hamburger from 'hamburger-react'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/userRedux'
-import FirstAnnouncement from '../Announcement'
 import Notification from '../Notification'
 import { Card } from 'antd'
 
 // Components
-
-const MainContainer = styled.nav`
-    position: sticky;
-    top: 0;
-    height: 85px;
-    z-index: 10;
-`
 
 const Container = styled.nav`
     background: white;
@@ -400,7 +392,7 @@ const Nav = ({ toggle }) => {
     const [matchedProducts, setMatchedProducts] = useState([])
     const [isOpen, setIsOpen] = useState(false)
 
-    const toggleUp = () => {
+    const toggleHome = () => {
         scroll.scrollToTop(); 
     }
 
@@ -448,8 +440,7 @@ const Nav = ({ toggle }) => {
     };
 
     return (
-        <MainContainer>
-            <FirstAnnouncement />
+        <Fragment>
             <Notification 
                 title={notifyTitle}
                 message={notifyMes}
@@ -464,7 +455,7 @@ const Nav = ({ toggle }) => {
                         color='black'
                     />
                 </MobileIcon>
-                <NavLogo to='/' onClick={toggleUp}>
+                <NavLogo to='/' onClick={toggleHome}>
                     BRONX
                 </NavLogo>
                 <NavContainer>
@@ -484,7 +475,7 @@ const Nav = ({ toggle }) => {
                                     matchedProducts.map((item, index) => {
                                         return (
                                             <ProductResults>
-                                                <NavProductLink to={`/product/${item._id}`} onClick={toggleUp}>
+                                                <NavProductLink to={`/product/${item._id}`}>
                                                     <ProductWrapper key={index}>
                                                         <ImgWrapper>
                                                             <Img src={item.img} />
@@ -548,10 +539,10 @@ const Nav = ({ toggle }) => {
                     <UserContainer>
                         {!user ? (
                             <NavSign>
-                                <NavSignInLink to='/login' onClick={toggleUp}>
+                                <NavSignInLink to='/login' onClick={toggleHome}>
                                     iniciar sesión
                                 </NavSignInLink>
-                                <NavSignUpLink to='/register' onClick={toggleUp}>
+                                <NavSignUpLink to='/register' onClick={toggleHome}>
                                     registrarse
                                 </NavSignUpLink>
                             </NavSign>
@@ -565,7 +556,7 @@ const Nav = ({ toggle }) => {
                     </UserContainer>
                     <NavCart>
                         {!user ? (
-                            <NavCartLink to='/login' type='user' onClick={toggleUp}>
+                            <NavCartLink to='/login' type='user' onClick={toggleHome}>
                                 <Person style={{fontSize:'20px'}} />
                             </NavCartLink>
                         ) : (
@@ -573,7 +564,7 @@ const Nav = ({ toggle }) => {
                                 <BiLogOut style={{fontSize:'20px'}} />
                             </NavCartLink>
                         )}
-                        <NavCartLink to='/favorites' type='favs' onClick={toggleUp}>
+                        <NavCartLink to='/favorites' type='favs' onClick={toggleHome}>
                             <ThemeProvider theme={theme}>
                                 <Badge badgeContent={favoriteQuantity} color='success' overlap='rectangular' variant='dot'>
                                     <Favorite style={{fontSize: '20px'}} />
@@ -590,7 +581,7 @@ const Nav = ({ toggle }) => {
                     </NavCart>
                 </NavContainer>
             </Container>
-        </MainContainer>
+        </Fragment>
     )   
 }
 
