@@ -35,7 +35,7 @@ const SidebarContainer = styled.aside`
 
     @media only screen and (max-width: 500px) {
         width: 100%;
-        margin-top: 85px;
+        margin-top: 60px;
         border-top-right-radius: 0;
         border-bottom-left-radius: 25px;
         left: 0;
