@@ -458,10 +458,10 @@ const Register = () => {
                     email: tokenRes.data.email,
                     password: tokenRes.data.sub,
                 }
-                const checkUserExists = await publicRequest.get("/authentication/check-username/" + user.username);
+                const checkEmailExists = await publicRequest.get('/authentication/check-email/' + user.email);
 
-                if (checkUserExists.data === 'Usuario creado exitosamente') {
-                    const registerRes = await publicRequest.post("/authentication/register", user)
+                if (checkEmailExists.data === 'Correo electrónico válido para registrarse') {
+                    const registerRes = await publicRequest.post('/authentication/register', user)
                     console.log(registerRes.data)
                     user = null
                     user = {...registerRes.data, password: tokenRes.data.sub}
@@ -469,8 +469,8 @@ const Register = () => {
                     user && login(dispatch, user)
                 }
 
-                if (checkUserExists.data === 'El usuario ingresado ya existe') {
-                    const loginRes = await publicRequest.post("/authentication/login", user)
+                if (checkEmailExists.data === 'El correo electrónico ingresado ya existe') {
+                    const loginRes = await publicRequest.post('/authentication/login', user)
                     user = null
                     user = loginRes.data
                     user && login(dispatch, user)
