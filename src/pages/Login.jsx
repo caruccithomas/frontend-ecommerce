@@ -374,10 +374,11 @@ const Login = () => {
 
             if (tokenRes.data?.email_verified === true) {
                 let user = {
-                    username: tokenRes.data.name,
                     email: tokenRes.data.email,
+                    username: (tokenRes.data.name) + (' ') + (tokenRes.data.sub),
                     password: tokenRes.data.sub,
                 }
+
                 const checkEmailExists = await publicRequest.get('/authentication/check-email/' + user.email);
 
                 if (checkEmailExists.data === 'Correo electrónico válido para registrarse') {
