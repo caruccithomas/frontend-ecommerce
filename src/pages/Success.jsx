@@ -10,7 +10,9 @@ import Footer from "../components/Footer";
 import ScrollToTop from '../components/Effects/ScrollToTop';
 import { Cancel, CheckCircle } from "@material-ui/icons";
 
-// Components
+// Styles
+
+const MainContainer = styled.div``
 
 const Container = styled.div`
   flex-direction: column;
@@ -101,6 +103,12 @@ const Button = styled.button`
 
   @media only screen and (max-width: 500px) {
     padding: 15px 30px;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 325px) {
+    padding: 10px 30px;
+    font-size: 12px;
   }
 `
 
@@ -145,41 +153,43 @@ const Success = () => {
 
   return (
     <Fragment>
-      <ScrollToTop />
-      <Container>
+      <MainContainer>
+        <ScrollToTop />
         <Navbar />
-        {orderId && (
+        <Container>
+          {orderId && (
+            <Wrapper>
+              <Icon type='check'>
+                <CheckCircle style={{
+                  width: '100px',
+                  height: '100px',
+                }} />
+              </Icon>
+              <Title>Tu orden ha sido recibida</Title>
+              <Text>El código de tu pedido es: <strong>{orderId}</strong>.</Text>
+              <Text>Proximamente podrás recibir  un correo con los detalles de tu compra.</Text>
+            </Wrapper>
+          )}
+          {!cart && (
+            <Wrapper>
+              <Icon type='cancel'>
+                <Cancel style={{
+                  width: '100px',
+                  height: '100px',
+                }} />
+              </Icon>
+              <Title>La orden fue cancelada</Title>
+              <Text>¡Algo salió mal!</Text>
+              <Text>Vuelve a realizar el pedido nuevamente.</Text>
+            </Wrapper>
+          )}
           <Wrapper>
-            <Icon type='check'>
-              <CheckCircle style={{
-                width: '100px',
-                height: '100px',
-              }} />
-            </Icon>
-            <Title>Tu orden ha sido recibida</Title>
-            <Text>El código de tu pedido es: <strong>{orderId}</strong>.</Text>
-            <Text>Proximamente podrás recibir  un correo con los detalles de tu compra.</Text>
+            <Link to='/'>
+              <Button>SEGUIR COMPPRANDO</Button>
+            </Link>
           </Wrapper>
-        )}
-        {!cart && (
-          <Wrapper>
-            <Icon type='cancel'>
-              <Cancel style={{
-                width: '100px',
-                height: '100px',
-              }} />
-            </Icon>
-            <Title>La orden fue cancelada</Title>
-            <Text>¡Algo salió mal!</Text>
-            <Text>Vuelve a realizar el pedido nuevamente.</Text>
-          </Wrapper>
-        )}
-        <Wrapper>
-          <Link to='/'>
-            <Button>SEGUIR COMPPRANDO</Button>
-          </Link>
-        </Wrapper>
-      </Container>
+        </Container>
+      </MainContainer>
       <Footer />
     </Fragment>
   )
