@@ -19,17 +19,12 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    row-gap: 30px;
+    row-gap: 25px;
 
     @media screen and (max-width: 600px) {
         align-items: center;
         justify-content: center;
-        row-gap: 20px;
     }
-`
-
-const MidTitle = styled.div`
-    margin-top: 50px;
 `
 
 const LogoText = styled.h2`
@@ -67,11 +62,9 @@ const TitlesFooter = () => {
     return (
         <Container>
             <Wrapper>
-                <MidTitle>
-                    <Link to='/' onClick={toggle} style={{textDecoration:'none', cursor:'pointer'}}>
-                        <LogoText>BRONX boutique</LogoText>
-                    </Link>
-                </MidTitle>
+                <Link to='/' onClick={toggle} style={{textDecoration:'none', cursor:'pointer'}}>
+                    <LogoText>BRONX boutique</LogoText>
+                </Link>
                 <BottomTitle>
                     Desarrollado por Thomas Carucci
                 </BottomTitle>

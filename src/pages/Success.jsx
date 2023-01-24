@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import styled from 'styled-components';
 import { Link as LinkRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
@@ -144,7 +144,7 @@ const Success = () => {
   }, [cart, data, currentUser, dispatch])
 
   return (
-    <>
+    <Fragment>
       <Navbar />
       <Container>
         <ScrollToTop />
@@ -181,7 +181,7 @@ const Success = () => {
         </Wrapper>
       </Container>
       <Footer />
-    </>
+    </Fragment>
   )
 }
 

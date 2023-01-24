@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link as LinkRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 import NavFav from '../components/NavFav';
-import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import Videos from '../videos/vertical/video_12.mp4';
 import { AddShoppingCartOutlined, Clear } from '@material-ui/icons';
@@ -24,11 +23,13 @@ const Container = styled.div`
     height: 100%;
     margin-top: 20px;
     padding: 20px 80px;
+    padding-bottom: 75px;
     background: #f8f8f8;
+    transition: all 0.5s ease-in-out;
 
     @media only screen and (max-width: 950px) {
         padding: 20px;
-        transition: all 0.5s ease-in-out;
+        padding-bottom: 42px;
     }
 `
 
@@ -347,13 +348,11 @@ const VideoContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    margin-bottom: -20px;
     padding: 0 30px;
-    width: auto;
+    width: 100%;
     height: 80vh;
     position: relative;
-    box-shadow: 1px 2px 6px 1px grey;
-    border-radius: 30px;
+    z-index: 1;
 
     :before {
         content: '';
@@ -377,7 +376,7 @@ const VideoContainer = styled.div`
     }
 
     @media only screen and (max-width: 1280px) {
-        height: 60vh;
+        height: 40vh;
     }
 `
 
@@ -407,24 +406,38 @@ const Content = styled.div`
     align-items: center;
     justify-content: center;
     row-gap: 20px;
+
+    @media only screen and (max-width: 1280px) {
+        row-gap: 10px;
+    }
+
+    @media screen and (max-width: 950px) {
+        row-gap: 5px;
+    }
 `
 
 const TitleWeight = styled.span`
-    width: 100%;
     font-weight: 800;
     font-size: 40px;
     font-family: 'Audiowide', cursive;
     display: inline;
-    color: lightgrey;
+    color: whitesmoke;
     text-align: center;
     text-shadow: 1px 2px 6px #000;
+    letter-spacing: 2px;
 
-    @media only screen and (max-width: 500px) {
+    @media only screen and (max-width: 1280px) {
+        width: 100%;
         font-size: 35px;
+        letter-spacing: -2px;
     }
 
-    @media screen and (max-width: 325px) {
+    @media screen and (max-width: 950px) {
         font-size: 30px;
+    }
+
+    @media only screen and (max-width: 325px) {
+        font-size: 25px;
     }
 `
 
@@ -438,17 +451,30 @@ const Title = styled.h1`
     font-weight: 400;
     text-align: center;
     text-shadow: 2px 2px 8px #0d0d0d;
-
-    @media only screen and (max-width: 320px) {
+    
+    @media only screen and (max-width: 1280px) {
         font-size: 25px;
+        max-width: 100%;
+        letter-spacing: 2px;
+    }
+
+    @media screen and (max-width: 950px) {
+        font-size: 20px;
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: 18px;
+        max-width: 50%;
+        letter-spacing: 0;
     }
 `
 
 const DiscountButton = styled.button`
-    padding: 10px 5vw;
+    padding: 10px 50px;
     margin-top: 20px;
     border-radius: 50px;
     border: none;
+    background: rgba(255, 255, 255, 0.7);
     letter-spacing: 2px;
     transition: all 0.2s ease-in-out;
     text-shadow: 1px 1px 1px grey;
@@ -457,6 +483,10 @@ const DiscountButton = styled.button`
     &:hover {
         background-color: #0d0d0d;
         color: whitesmoke;
+    }
+
+    @media only screen and (max-width: 325px) {
+        padding: 8px 35px;
     }
 `
 
@@ -599,105 +629,106 @@ const Favorites = () => {
     }
 
     return (
-        <MainContainer>
-            <Navbar />
-            <NavFav />
-            <Notification title={title} message={message} type={type} />
-            <Container>
-                    <Wrapper>
-                        <Info>
-
-                            {favorites.quantity === 0 && (
-                                <EmptyTarget>
-                                    <SVGEmpty src={emptyImg} />
-                                    <TitleEmpty>LISTA DE FAVORITOS VACÍA</TitleEmpty>
-                                    <TextEmpty>Los productos que agregues a favoritos se guardarán aquí.</TextEmpty>
-                                </EmptyTarget>
-                            )}
-
-                            {favorites.products.map(product => (
-                                <Link to={`/product/${product._id}`} key={product._id}>
-                                    <ProductTarget>
-                                        <ImageContainer>
-                                            <ImgCircle>
-                                                <Image src={product.img} />
-                                            </ImgCircle>
-                                        </ImageContainer>
-                                        <Line />
-                                        <ProductDetail>
-                                            <Details>
-                                                <ProductName><b>Producto:</b> {product.title} </ProductName>
-                                                <ProductBrand><b>Marca:</b> {product.brand} </ProductBrand>
-                                                <ProductColor>
-                                                    <b>Color:</b>
-                                                    <Color color={'#' + product.color[0]} />
-                                                </ProductColor>
-                                                <ProductSize>
-                                                    <b>Talle:</b>
-                                                    <Size>{product.size[0]}</Size>
-                                                </ProductSize>
-                                            </Details>
-                                        </ProductDetail>
-                                        <PriceDetail>
-                                            <AddToCartContainer>
-                                                <AddToCart>
-                                                    <AddShoppingCartOutlined style={{fontSize: '25px'}} onClick={(e) => handleEvent(e) + handleProduct(product._id)} />
-                                                </AddToCart>
-                                            </AddToCartContainer>
-                                            <ProductPrice>U$D {product.price * product.quantity} </ProductPrice>
-                                        </PriceDetail>
-                                        <DeleteContainer type='desktop'>
-                                            <Clear style={{cursor: 'pointer'}} onClick={(e) => handleEvent(e) + removeFavorite(product._id)} />
-                                        </DeleteContainer>
-                                        <DeleteContainer type='mobile'>
-                                            <DeleteButton onClick={(e) => handleEvent(e) + removeFavorite(product._id)}>
-                                                ELIMINAR
-                                            </DeleteButton>
-                                        </DeleteContainer>
-                                    </ProductTarget>
-                                </Link>
-                            ))}
-
-                        </Info>
-                        <SummaryContainer>
-                            <Summary>
-                                <SummaryTitle>RESUMEN DE TU LISTA</SummaryTitle>
-                                <SummaryItem>
-                                    <SummaryItemText>Subtotal</SummaryItemText>
-                                    <SummaryItemPrice>$ {favorites.total}</SummaryItemPrice>
-                                </SummaryItem>
-                                <SummaryItem>
-                                    <SummaryItemText>Costos Adicionales</SummaryItemText>
-                                    <SummaryItemPrice>$ 0</SummaryItemPrice>
-                                </SummaryItem>
-                                <SummaryItem>
-                                    <SummaryItemText>Descuentos Adicionales</SummaryItemText>
-                                    <SummaryItemPrice>- $ 0</SummaryItemPrice>
-                                </SummaryItem>
-                                <SummaryItem type='total'>
-                                    <SummaryItemText>Total</SummaryItemText>
-                                    <SummaryItemPrice>$ {favorites.total}</SummaryItemPrice>
-                                </SummaryItem>
-                                <Button type='filled' onClick={handleTotal}>
-                                        AGREGAR AL CARRITO
-                                </Button>
-                            </Summary>
-                            <VideoContainer>
-                                <BackgroundClip>
-                                    <Video autoPlay loop muted src={Videos} type='video/mp4' />
-                                </BackgroundClip>
-                                <Content>
-                                    <TitleWeight>DESCUBRE</TitleWeight>
-                                    <Title>próximas colecciones</Title>
-                                    <DiscountButton onClick={handleClick}>INGRESAR</DiscountButton>
-                                </Content>
-                            </VideoContainer>
-                        </SummaryContainer>
-                    </Wrapper>
-            </Container>
-            <Newsletter />
+        <Fragment>
+            <MainContainer>
+                <Navbar />
+                <NavFav />
+                <Notification title={title} message={message} type={type} />
+                <Container>
+                        <Wrapper>
+                            <Info>
+        
+                                {favorites.quantity === 0 && (
+                                    <EmptyTarget>
+                                        <SVGEmpty src={emptyImg} />
+                                        <TitleEmpty>LISTA DE FAVORITOS VACÍA</TitleEmpty>
+                                        <TextEmpty>Los productos que agregues a favoritos se guardarán aquí.</TextEmpty>
+                                    </EmptyTarget>
+                                )}
+    
+                                {favorites.products.map(product => (
+                                    <Link to={`/product/${product._id}`} key={product._id}>
+                                        <ProductTarget>
+                                            <ImageContainer>
+                                                <ImgCircle>
+                                                    <Image src={product.img} />
+                                                </ImgCircle>
+                                            </ImageContainer>
+                                            <Line />
+                                            <ProductDetail>
+                                                <Details>
+                                                    <ProductName><b>Producto:</b> {product.title} </ProductName>
+                                                    <ProductBrand><b>Marca:</b> {product.brand} </ProductBrand>
+                                                    <ProductColor>
+                                                        <b>Color:</b>
+                                                        <Color color={'#' + product.color[0]} />
+                                                    </ProductColor>
+                                                    <ProductSize>
+                                                        <b>Talle:</b>
+                                                        <Size>{product.size[0]}</Size>
+                                                    </ProductSize>
+                                                </Details>
+                                            </ProductDetail>
+                                            <PriceDetail>
+                                                <AddToCartContainer>
+                                                    <AddToCart>
+                                                        <AddShoppingCartOutlined style={{fontSize: '25px'}} onClick={(e) => handleEvent(e) + handleProduct(product._id)} />
+                                                    </AddToCart>
+                                                </AddToCartContainer>
+                                                <ProductPrice>U$D {product.price * product.quantity} </ProductPrice>
+                                            </PriceDetail>
+                                            <DeleteContainer type='desktop'>
+                                                <Clear style={{cursor: 'pointer'}} onClick={(e) => handleEvent(e) + removeFavorite(product._id)} />
+                                            </DeleteContainer>
+                                            <DeleteContainer type='mobile'>
+                                                <DeleteButton onClick={(e) => handleEvent(e) + removeFavorite(product._id)}>
+                                                    ELIMINAR
+                                                </DeleteButton>
+                                            </DeleteContainer>
+                                        </ProductTarget>
+                                    </Link>
+                                ))}
+    
+                            </Info>
+                            <SummaryContainer>
+                                <Summary>
+                                    <SummaryTitle>RESUMEN DE TU LISTA</SummaryTitle>
+                                    <SummaryItem>
+                                        <SummaryItemText>Subtotal</SummaryItemText>
+                                        <SummaryItemPrice>$ {favorites.total}</SummaryItemPrice>
+                                    </SummaryItem>
+                                    <SummaryItem>
+                                        <SummaryItemText>Costos Adicionales</SummaryItemText>
+                                        <SummaryItemPrice>$ 0</SummaryItemPrice>
+                                    </SummaryItem>
+                                    <SummaryItem>
+                                        <SummaryItemText>Descuentos Adicionales</SummaryItemText>
+                                        <SummaryItemPrice>- $ 0</SummaryItemPrice>
+                                    </SummaryItem>
+                                    <SummaryItem type='total'>
+                                        <SummaryItemText>Total</SummaryItemText>
+                                        <SummaryItemPrice>$ {favorites.total}</SummaryItemPrice>
+                                    </SummaryItem>
+                                    <Button type='filled' onClick={handleTotal}>
+                                            AGREGAR AL CARRITO
+                                    </Button>
+                                </Summary>
+                                <VideoContainer>
+                                    <BackgroundClip>
+                                        <Video autoPlay loop muted src={Videos} type='video/mp4' />
+                                    </BackgroundClip>
+                                    <Content>
+                                        <TitleWeight>DESCUBRE</TitleWeight>
+                                        <Title>próximas colecciones</Title>
+                                        <DiscountButton onClick={handleClick}>INGRESAR</DiscountButton>
+                                    </Content>
+                                </VideoContainer>
+                            </SummaryContainer>
+                        </Wrapper>
+                </Container>
+            </MainContainer>
             <Footer />
-        </MainContainer>
+        </Fragment>
     )
 }
 

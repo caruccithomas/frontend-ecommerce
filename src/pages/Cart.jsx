@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Link as LinkRouter, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 import NavCart from '../components/NavCart';
-import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import Videos from '../videos/vertical/video_02.mp4';
 import { userRequest } from '../requestMethods';
@@ -26,11 +25,13 @@ const Container = styled.div`
     height: 100%;
     margin-top: 20px;
     padding: 20px 80px;
+    padding-bottom: 75px;
     background: #f8f8f8;
+    transition: all 0.5s ease-in-out;
 
     @media only screen and (max-width: 950px) {
         padding: 20px;
-        transition: all 0.5s ease-in-out;
+        padding-bottom: 42px;
     }
 `
 
@@ -380,7 +381,6 @@ const VideoContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    margin-bottom: -20px;
     padding: 0 30px;
     width: 100%;
     height: 80vh;
@@ -409,7 +409,7 @@ const VideoContainer = styled.div`
     }
 
     @media only screen and (max-width: 1280px) {
-        height: 60vh;
+        height: 40vh;
     }
 `
 
@@ -439,19 +439,39 @@ const Content = styled.div`
     align-items: center;
     justify-content: center;
     row-gap: 20px;
+
+    @media only screen and (max-width: 1280px) {
+        row-gap: 10px;
+    }
+
+    @media screen and (max-width: 950px) {
+        row-gap: 5px;
+    }
 `
 
 const TitleWeight = styled.span`
     font-weight: 800;
     font-size: 45px;
     font-family: 'Audiowide', cursive;
+    width: 50%;
     display: inline;
     color: whitesmoke;
     text-align: center;
     text-shadow: 1px 2px 6px #000;
+    letter-spacing: 3px;
+
+    @media only screen and (max-width: 1280px) {
+        width: 100%;
+        font-size: 40px;
+        letter-spacing: -2px;
+    }
+
+    @media screen and (max-width: 950px) {
+        font-size: 35px;
+    }
 
     @media only screen and (max-width: 325px) {
-        width: 50%;
+        font-size: 30px;
     }
 `
 
@@ -466,16 +486,29 @@ const Title = styled.h1`
     text-align: center;
     text-shadow: 2px 2px 8px #0d0d0d;
     
-    @media only screen and (max-width: 325px) {
+    @media only screen and (max-width: 1280px) {
         font-size: 25px;
+        max-width: 100%;
+        letter-spacing: 2px;
+    }
+
+    @media screen and (max-width: 950px) {
+        font-size: 20px;
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: 18px;
+        max-width: 50%;
+        letter-spacing: 0;
     }
 `
 
 const DiscountButton = styled.button`
-    padding: 10px 5vw;
+    padding: 10px 50px;
     margin-top: 20px;
     border-radius: 50px;
     border: none;
+    background: rgba(255, 255, 255, 0.7);
     letter-spacing: 2px;
     transition: all 0.2s ease-in-out;
     text-shadow: 1px 1px 1px grey;
@@ -484,6 +517,10 @@ const DiscountButton = styled.button`
     &:hover {
         background-color: #0d0d0d;
         color: whitesmoke;
+    }
+
+    @media only screen and (max-width: 325px) {
+        padding: 8px 35px;
     }
 `
 
@@ -641,135 +678,136 @@ const Cart = () => {
     }, [stripeToken, cart, navigate])
 
     return (
-        <MainContainer>
-            <Navbar />
-            <NavCart />
-            <Notification title={title} message={message} type={type} />
-            <Container>
-                    <Wrapper>
-                        <Info>
+        <Fragment>
+            <MainContainer>
+                <Navbar />
+                <NavCart />
+                <Notification title={title} message={message} type={type} />
+                <Container>
+                        <Wrapper>
+                            <Info>
 
-                            {cart.quantity === 0 && (
-                                <EmptyTarget>
-                                    <SVGEmpty src={emptyImg} />
-                                    <TitleEmpty>INVENTARIO VACÍO</TitleEmpty>
-                                    <TextEmpty>Navega por nuestras selecciones de productos elegidos especialmente para vos.</TextEmpty>
-                                </EmptyTarget>
-                            )}
-
-                            {cart.products.map(product => (
-                                <Link to={`/product/${product._id}`} key={product._id}>
-                                    <ProductTarget>
-                                        <ImageContainer>
-                                            <ImgCircle>
-                                                <Image src={product.img} />
-                                            </ImgCircle>
-                                        </ImageContainer>
-                                        <Line />
-                                        <ProductDetail>
-                                            <Details>
-                                                <ProductName><b>Producto:</b> {product.title} </ProductName>
-                                                <ProductBrand><b>Marca:</b> {product.brand} </ProductBrand>
-                                                <ProductColor> 
-                                                    <b>Color:</b>
-                                                    <Color color={'#' + product.color} />
-                                                </ProductColor>
-                                                <ProductSize>
-                                                    <b>Talle:</b>
-                                                    <Size>{product.size}</Size>
-                                                </ProductSize>
-                                            </Details>
-                                        </ProductDetail>
-                                        <PriceDetail>
-                                            <PriceAmountContainer>
-                                                <Remove
-                                                    onClick={(e) => handleEvent(e) + handleQuantity("desc", product._id)}
-                                                />
-                                                <ProductAmount> {product.quantity} </ProductAmount>
-                                                <Add
-                                                    onClick={(e) => handleEvent(e) + handleQuantity("asc", product._id)}
-                                                />
-                                            </PriceAmountContainer>
-                                            <ProductPrice>U$D {product.price * product.quantity} </ProductPrice>
-                                        </PriceDetail>
-                                        <DeleteContainer type='desktop'>
-                                            <Clear style={{cursor: 'pointer'}} onClick={(e) => handleEvent(e) + removeFromCart(product._id)} />
-                                        </DeleteContainer>
-                                        <DeleteContainer type='mobile'>
-                                            <DeleteButton onClick={(e) => handleEvent(e) + removeFromCart(product._id)}>
-                                                ELIMINAR
-                                            </DeleteButton>
-                                        </DeleteContainer>
-                                    </ProductTarget>
-                                </Link>
-                            ))}
-
-                        </Info>
-                        <SummaryContainer>
-                            <Summary>
-                                <SummaryTitle>RESUMEN DEL PEDIDO</SummaryTitle>
-                                <SummaryItem>
-                                    <SummaryItemText>Subtotal</SummaryItemText>
-                                    <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
-                                </SummaryItem>
-                                <SummaryItem>
-                                    <SummaryItemText>Costos de Envío</SummaryItemText>
-                                    <SummaryItemPrice>$ 1.500</SummaryItemPrice>
-                                </SummaryItem>
-                                <SummaryItem>
-                                    <SummaryItemText>Descuentos Adicionales</SummaryItemText>
-                                    <SummaryItemPrice>- $ 1.500</SummaryItemPrice>
-                                </SummaryItem>
-                                <SummaryItem type='total'>
-                                    <SummaryItemText>Total</SummaryItemText>
-                                    <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
-                                </SummaryItem>
-                                    
-                                {user.currentUser ? (
-                                        <StripeCheckout
-                                            name="Bronx Boutique"
-                                            image="https://i.ibb.co/P9xnxbg/BRONX.png"
-                                            billingAddress
-                                            shippingAddress
-                                            description={`Su total es de U$D ${cart.total}`}
-                                            amount={cart.total * 100}
-                                            token={onToken}
-                                            stripeKey={KEY}
-                                        >
-                                            <Button type='filled'>
-                                                PAGAR AHORA
-                                            </Button>
-                                        </StripeCheckout>
-                                ) : (
-                                    <Button type='filled' onClick={handleCheckout}>
-                                        PAGAR AHORA
-                                    </Button>
+                                {cart.quantity === 0 && (
+                                    <EmptyTarget>
+                                        <SVGEmpty src={emptyImg} />
+                                        <TitleEmpty>INVENTARIO VACÍO</TitleEmpty>
+                                        <TextEmpty>Navega por nuestras selecciones de productos elegidos especialmente para vos.</TextEmpty>
+                                    </EmptyTarget>
                                 )}
-                            <Link to='/'>
-                                <Button>
-                                        SEGUIR COMPRANDO
-                                </Button>
-                            </Link>
-                                <MethodsWrapper>
-                                    <Methods src={stripePayments} />
-                                </MethodsWrapper>
-                            </Summary>
-                            <VideoContainer>
-                                <BackgroundClip>
-                                    <Video autoPlay loop muted src={Videos} type='video/mp4' />
-                                </BackgroundClip>
-                                <Content>
-                                    <TitleWeight>35% OFF</TitleWeight>
-                                    <Title>descuentos semanales</Title>
-                                    <DiscountButton onClick={handleClick}>OBTENER</DiscountButton>
-                                </Content>
-                            </VideoContainer>
-                        </SummaryContainer>
-                    </Wrapper>
-            </Container>
-            <Newsletter />
+
+                                {cart.products.map(product => (
+                                    <Link to={`/product/${product._id}`} key={product._id}>
+                                        <ProductTarget>
+                                            <ImageContainer>
+                                                <ImgCircle>
+                                                    <Image src={product.img} />
+                                                </ImgCircle>
+                                            </ImageContainer>
+                                            <Line />
+                                            <ProductDetail>
+                                                <Details>
+                                                    <ProductName><b>Producto:</b> {product.title} </ProductName>
+                                                    <ProductBrand><b>Marca:</b> {product.brand} </ProductBrand>
+                                                    <ProductColor> 
+                                                        <b>Color:</b>
+                                                        <Color color={'#' + product.color} />
+                                                    </ProductColor>
+                                                    <ProductSize>
+                                                        <b>Talle:</b>
+                                                        <Size>{product.size}</Size>
+                                                    </ProductSize>
+                                                </Details>
+                                            </ProductDetail>
+                                            <PriceDetail>
+                                                <PriceAmountContainer>
+                                                    <Remove
+                                                        onClick={(e) => handleEvent(e) + handleQuantity("desc", product._id)}
+                                                    />
+                                                    <ProductAmount> {product.quantity} </ProductAmount>
+                                                    <Add
+                                                        onClick={(e) => handleEvent(e) + handleQuantity("asc", product._id)}
+                                                    />
+                                                </PriceAmountContainer>
+                                                <ProductPrice>U$D {product.price * product.quantity} </ProductPrice>
+                                            </PriceDetail>
+                                            <DeleteContainer type='desktop'>
+                                                <Clear style={{cursor: 'pointer'}} onClick={(e) => handleEvent(e) + removeFromCart(product._id)} />
+                                            </DeleteContainer>
+                                            <DeleteContainer type='mobile'>
+                                                <DeleteButton onClick={(e) => handleEvent(e) + removeFromCart(product._id)}>
+                                                    ELIMINAR
+                                                </DeleteButton>
+                                            </DeleteContainer>
+                                        </ProductTarget>
+                                    </Link>
+                                ))}
+
+                            </Info>
+                            <SummaryContainer>
+                                <Summary>
+                                    <SummaryTitle>RESUMEN DEL PEDIDO</SummaryTitle>
+                                    <SummaryItem>
+                                        <SummaryItemText>Subtotal</SummaryItemText>
+                                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+                                    </SummaryItem>
+                                    <SummaryItem>
+                                        <SummaryItemText>Costos de Envío</SummaryItemText>
+                                        <SummaryItemPrice>$ 1.500</SummaryItemPrice>
+                                    </SummaryItem>
+                                    <SummaryItem>
+                                        <SummaryItemText>Descuentos Adicionales</SummaryItemText>
+                                        <SummaryItemPrice>- $ 1.500</SummaryItemPrice>
+                                    </SummaryItem>
+                                    <SummaryItem type='total'>
+                                        <SummaryItemText>Total</SummaryItemText>
+                                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+                                    </SummaryItem>
+
+                                    {user.currentUser ? (
+                                            <StripeCheckout
+                                                name="Bronx Boutique"
+                                                image="https://i.ibb.co/P9xnxbg/BRONX.png"
+                                                billingAddress
+                                                shippingAddress
+                                                description={`Su total es de U$D ${cart.total}`}
+                                                amount={cart.total * 100}
+                                                token={onToken}
+                                                stripeKey={KEY}
+                                            >
+                                                <Button type='filled'>
+                                                    PAGAR AHORA
+                                                </Button>
+                                            </StripeCheckout>
+                                    ) : (
+                                        <Button type='filled' onClick={handleCheckout}>
+                                            PAGAR AHORA
+                                        </Button>
+                                    )}
+                                <Link to='/'>
+                                    <Button>
+                                            SEGUIR COMPRANDO
+                                    </Button>
+                                </Link>
+                                    <MethodsWrapper>
+                                        <Methods src={stripePayments} />
+                                    </MethodsWrapper>
+                                </Summary>
+                                <VideoContainer>
+                                    <BackgroundClip>
+                                        <Video autoPlay loop muted src={Videos} type='video/mp4' />
+                                    </BackgroundClip>
+                                    <Content>
+                                        <TitleWeight>35% OFF</TitleWeight>
+                                        <Title>descuentos semanales</Title>
+                                        <DiscountButton onClick={handleClick}>OBTENER</DiscountButton>
+                                    </Content>
+                                </VideoContainer>
+                            </SummaryContainer>
+                        </Wrapper>
+                </Container>
+            </MainContainer>
             <Footer />
-        </MainContainer>
+        </Fragment>
     )
 }
 

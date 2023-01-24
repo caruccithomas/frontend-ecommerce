@@ -1,19 +1,28 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import { TbAdjustmentsHorizontal } from 'react-icons/tb'
 import { CgArrowsExchangeAltV } from 'react-icons/cg'
 import Navbar from '../components/Navbar'
 import Products from '../components/Products'
-import Newsletter from '../components/Newsletter'
 import Footer from '../components/Footer'
 
-const Content = styled.div``
+// Styles
+
+const MainContainer = styled.div``
+
+const Content = styled.div`
+    padding: 80px 0;
+    margin-top: -60px;
+
+    @media only screen and (max-width: 950px) {
+        padding-bottom: 40px;
+    }
+`
 
 const Container = styled.div`
     width: 100%;
     justify-content: center;
-    padding-top: 20px;
 `
 
 const TitleContainer = styled.div`
@@ -222,7 +231,6 @@ const Option = styled.option`
 
 const ProductsPage = () => {
     const location = useLocation();
-    // console.log(location);
     const categories = location.pathname.split('/')[2];
     console.log(categories);
     const currentPage = window.location.href.split('/')[3];
@@ -237,97 +245,98 @@ const ProductsPage = () => {
             // [e.target.name]: value.tolowercase() => For Filter Edits / Save filters in lowercase from DB
         });
     };
-    
-    // console.log(filters);
 
     return (
-        <Content>
+        <Fragment>
+        <MainContainer>
             <Navbar />
-            <Container>
-                <TitleContainer>
-                    <Title>{categories.toUpperCase() || 'PRENDAS & ACCESORIOS'}</Title>
-                </TitleContainer>
-                <FilterContainer>
-                    <FilterWrapper type='left'>
-                        <Filter type='left'>
-                            <FilterIcon type='left'>
-                                <TbAdjustmentsHorizontal style={{fontSize:'20px'}} />
-                            </FilterIcon>
-                            <FilterText type='left'>FILTROS</FilterText>
-                        </Filter>
-                        <SelectWrapper>
-                            <Select name='type' onChange={handleFilters} type='left'>
-                                <Option selected={true} hidden>PRODUCTOS</Option>
-                                <Option>Accesorios</Option>
-                                <Option>Bolsos</Option>
-                                <Option>Camisas</Option>
-                                <Option>Camisetas</Option>
-                                <Option>Camperas</Option>
-                                <Option>Chalecos</Option>
-                                <Option>Chaquetas</Option>
-                                <Option>Gorros</Option>
-                                <Option>Relojes</Option>
-                                <Option>Sacos</Option>
-                                <Option>Sudaderas</Option>
-                                <Option>Pantalones</Option>
-                                <Option>Trajes</Option>
-                                <Option>Vestidos</Option>
-                                <Option>Zapatillas</Option>
-                                <Option>Zapatos</Option>
-                                <Option value='default' hidden>PRODUCTOS</Option>
-                            </Select>
-                            <Line />
-                            <Select name='brand' defaultValue={'default'} onChange={handleFilters} type='left'>
-                                <Option selected={true} hidden>MARCAS DE DISEÑO</Option>
-                                <Option>Bvlgari</Option>
-                                <Option>Chanel</Option>
-                                <Option>Christian Dior</Option>
-                                <Option>Christian Louboutin</Option>
-                                <Option>Giorgio Armani</Option>
-                                <Option>Gucci</Option>
-                                <Option>Jack Wolfskin</Option>
-                                <Option>Louis Vuitton</Option>
-                                <Option>Nike</Option>
-                                <Option>Prada</Option>
-                                <Option>Terranova</Option>
-                                <Option>The North Face</Option>
-                                <Option>Versace</Option>
-                            </Select>
-                            <Line />
-                            <Select name='size' onChange={handleFilters} type='left'>
-                                <Option selected={true} hidden>TAMAÑOS</Option>
-                                <Option>XXS</Option>
-                                <Option>XS</Option>
-                                <Option>S</Option>
-                                <Option>M</Option>
-                                <Option>L</Option>
-                                <Option>XL</Option>
-                                <Option>XXL</Option>
-                            </Select>
-                        </SelectWrapper>
-                    </FilterWrapper>
-                    <FilterWrapper type='right'>
-                        <Filter type='right'>
-                            <FilterText type='right'>ORGANIZADOR</FilterText>
-                            <FilterIcon type='right'>
-                                <CgArrowsExchangeAltV style={{fontSize:'20px'}}/>
-                            </FilterIcon>
-                        </Filter>
-                        <SelectWrapper>
-                            <Select onChange={(e) => setSort(e.target.value)}>
-                                <Option selected={true} hidden>ORDENAR POR PRECIO</Option>
-                                {/* <Option value='newest' type='right'>Novedades</Option> */}
-                                <Option value='asc'>Mayor Precio</Option>
-                                <Option value='desc'>Menor Precio</Option>
-                            </Select>
-                        </SelectWrapper>
-                    </FilterWrapper>
-                </FilterContainer>
-            </Container>
-            <Products categories={categories} filters={filters} sort={sort} page={currentPage} />
-            <Newsletter />
-            <Footer />
-        </Content>
+            <Content id='categories'>
+                <Container>
+                    <TitleContainer>
+                        <Title>{categories.toUpperCase()}</Title>
+                    </TitleContainer>
+                    <FilterContainer>
+                        <FilterWrapper type='left'>
+                            <Filter type='left'>
+                                <FilterIcon type='left'>
+                                    <TbAdjustmentsHorizontal style={{fontSize:'20px'}} />
+                                </FilterIcon>
+                                <FilterText type='left'>FILTROS</FilterText>
+                            </Filter>
+                            <SelectWrapper>
+                                <Select name='type' onChange={handleFilters} type='left'>
+                                    <Option selected={true} hidden>PRODUCTOS</Option>
+                                    <Option>Accesorios</Option>
+                                    <Option>Bolsos</Option>
+                                    <Option>Camisas</Option>
+                                    <Option>Camisetas</Option>
+                                    <Option>Camperas</Option>
+                                    <Option>Chalecos</Option>
+                                    <Option>Chaquetas</Option>
+                                    <Option>Gorros</Option>
+                                    <Option>Relojes</Option>
+                                    <Option>Sacos</Option>
+                                    <Option>Sudaderas</Option>
+                                    <Option>Pantalones</Option>
+                                    <Option>Trajes</Option>
+                                    <Option>Vestidos</Option>
+                                    <Option>Zapatillas</Option>
+                                    <Option>Zapatos</Option>
+                                    <Option value='default' hidden>PRODUCTOS</Option>
+                                </Select>
+                                <Line />
+                                <Select name='brand' defaultValue={'default'} onChange={handleFilters} type='left'>
+                                    <Option selected={true} hidden>MARCAS DE DISEÑO</Option>
+                                    <Option>Bvlgari</Option>
+                                    <Option>Chanel</Option>
+                                    <Option>Christian Dior</Option>
+                                    <Option>Christian Louboutin</Option>
+                                    <Option>Giorgio Armani</Option>
+                                    <Option>Gucci</Option>
+                                    <Option>Jack Wolfskin</Option>
+                                    <Option>Louis Vuitton</Option>
+                                    <Option>Nike</Option>
+                                    <Option>Prada</Option>
+                                    <Option>Terranova</Option>
+                                    <Option>The North Face</Option>
+                                    <Option>Versace</Option>
+                                </Select>
+                                <Line />
+                                <Select name='size' onChange={handleFilters} type='left'>
+                                    <Option selected={true} hidden>TAMAÑOS</Option>
+                                    <Option>XXS</Option>
+                                    <Option>XS</Option>
+                                    <Option>S</Option>
+                                    <Option>M</Option>
+                                    <Option>L</Option>
+                                    <Option>XL</Option>
+                                    <Option>XXL</Option>
+                                </Select>
+                            </SelectWrapper>
+                        </FilterWrapper>
+                        <FilterWrapper type='right'>
+                            <Filter type='right'>
+                                <FilterText type='right'>ORGANIZADOR</FilterText>
+                                <FilterIcon type='right'>
+                                    <CgArrowsExchangeAltV style={{fontSize:'20px'}}/>
+                                </FilterIcon>
+                            </Filter>
+                            <SelectWrapper>
+                                <Select onChange={(e) => setSort(e.target.value)}>
+                                    <Option selected={true} hidden>ORDENAR POR PRECIO</Option>
+                                    {/* <Option value='newest' type='right'>Novedades</Option> */}
+                                    <Option value='asc'>Mayor Precio</Option>
+                                    <Option value='desc'>Menor Precio</Option>
+                                </Select>
+                            </SelectWrapper>
+                        </FilterWrapper>
+                    </FilterContainer>
+                </Container>
+                <Products categories={categories} filters={filters} sort={sort} page={currentPage} />
+            </Content>
+        </MainContainer>
+        <Footer />
+        </Fragment>
     )
 }
 

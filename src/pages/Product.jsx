@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Navbar from '../components/Navbar'
-import Newsletter from '../components/Newsletter'
 import Footer from '../components/Footer'
 import { IoMdAdd, IoMdRemove } from 'react-icons/io'
 import { userRequest } from '../requestMethods'
@@ -621,131 +620,132 @@ const Product = () => {
     }
 
     return (
-        <MainContainer>
-            <Navbar />
-            <Container>
-                <Notification
-                    title={notifyTitle}
-                    message={notifyMes}
-                    type={notifyType}
-                    duration={7500}
-                />
-                <Wrapper>
-                    <ImgContainer>
-                        <Gallery>
-                            <>
-                                <div className={model ? 'model open' : 'model'}>
-                                    <Image src={tempImgSrc} alt='image' />
-                                    <CloseRounded onClick={() => setModel(false)} />
-                                </div>
-                                {product.img !== undefined && product.img.map((item, index) => {
-                                    return (
-                                        <ImageContainer onClick={() => getImg(item)}>
-                                            <Image src={item} key={index} alt='image' style={{width:'100%'}} />
-                                        </ImageContainer>
-                                    )
-                                })}
-                            </>
-                        </Gallery>
-                    </ImgContainer>
-                    <InfoContainer>
-                        <Info>
-                            <TopContainer>
-                                <TopWrapper>
-                                    <Brand>{product.brand}</Brand>
-                                    <FavContainer>
-                                        {favorites.products.find((element) => element._id === product._id) ? (
-                                            <FavWrapper type='added' onClick={(e) => handleEvent(e) + handleFavorite(product._id)}>
-                                                <Favorite style={{fontSize:'20px', color:'#fff'}} />
-                                            </FavWrapper>
-                                        ) : (
-                                            <FavWrapper type='add' onClick={(e) => handleEvent(e) + handleFavorite(product._id)}>
-                                                <AddCircleOutlineOutlined style={{fontSize:'15px'}} />
-                                                <Favorite style={{fontSize:'22px', color:'#01bf71'}} />
-                                            </FavWrapper>
-                                        )}
-                                    </FavContainer>
-                                </TopWrapper>
-                                <Title>{product.title}</Title>
-                                <PriceTag>
-                                    <Price>{'U$D ' + product.price}</Price>
-                                </PriceTag>
-                                <Description>{product.description}</Description>
-                            </TopContainer>
-                            <FilterContainer>
-                                <Filter className='color-choice'>
-                                    {product.color !== undefined && product.color.map((c, index) => {
+        <Fragment>
+            <MainContainer>
+                <Navbar />
+                <Container>
+                    <Notification
+                        title={notifyTitle}
+                        message={notifyMes}
+                        type={notifyType}
+                        duration={7500}
+                    />
+                    <Wrapper>
+                        <ImgContainer>
+                            <Gallery>
+                                <>
+                                    <div className={model ? 'model open' : 'model'}>
+                                        <Image src={tempImgSrc} alt='image' />
+                                        <CloseRounded onClick={() => setModel(false)} />
+                                    </div>
+                                    {product.img !== undefined && product.img.map((item, index) => {
                                         return (
-                                            <FilterColor color={'#' + c} key={index} onClick={(event) => {
-                                                handleColor(c)
-                                                handleColorClassListRef(colorRef)
-                                                handleColorRef(event)
-                                                handleColorClassListRef(colorRef)
-                                            }} />
+                                            <ImageContainer onClick={() => getImg(item)}>
+                                                <Image src={item} key={index} alt='image' style={{width:'100%'}} />
+                                            </ImageContainer>
                                         )
                                     })}
-
-                                </Filter>
-                                <Filter>
-                                    <AmountContainer> 
-                                        <Amount onClick={() => handleQuantity('decrease')}>
-                                            <IoMdRemove style={{cursor: 'pointer'}} />
-                                        </Amount>
-                                        <Amount style={{textShadow: '1px 1px 2px grey'}}>{quantity}</Amount>
-                                        <Amount onClick={() => handleQuantity('increase')}>
-                                            <IoMdAdd style={{cursor: 'pointer'}} />
-                                        </Amount>
-                                    </AmountContainer>
-                                </Filter>
-                            </FilterContainer>
-                            <ButtonContainer>
-                                <SizeTitleMobile>
-                                    SELECCIONA UN TAMAÑO
-                                </SizeTitleMobile>
-                                <SizeButton defaultValue={size} onClick={(s) => setSize(s.target.value)}>
-                                    <FilterSizeButton value='' hidden>
+                                </>
+                            </Gallery>
+                        </ImgContainer>
+                        <InfoContainer>
+                            <Info>
+                                <TopContainer>
+                                    <TopWrapper>
+                                        <Brand>{product.brand}</Brand>
+                                        <FavContainer>
+                                            {favorites.products.find((element) => element._id === product._id) ? (
+                                                <FavWrapper type='added' onClick={(e) => handleEvent(e) + handleFavorite(product._id)}>
+                                                    <Favorite style={{fontSize:'20px', color:'#fff'}} />
+                                                </FavWrapper>
+                                            ) : (
+                                                <FavWrapper type='add' onClick={(e) => handleEvent(e) + handleFavorite(product._id)}>
+                                                    <AddCircleOutlineOutlined style={{fontSize:'15px'}} />
+                                                    <Favorite style={{fontSize:'22px', color:'#01bf71'}} />
+                                                </FavWrapper>
+                                            )}
+                                        </FavContainer>
+                                    </TopWrapper>
+                                    <Title>{product.title}</Title>
+                                    <PriceTag>
+                                        <Price>{'U$D ' + product.price}</Price>
+                                    </PriceTag>
+                                    <Description>{product.description}</Description>
+                                </TopContainer>
+                                <FilterContainer>
+                                    <Filter className='color-choice'>
+                                        {product.color !== undefined && product.color.map((c, index) => {
+                                            return (
+                                                <FilterColor color={'#' + c} key={index} onClick={(event) => {
+                                                    handleColor(c)
+                                                    handleColorClassListRef(colorRef)
+                                                    handleColorRef(event)
+                                                    handleColorClassListRef(colorRef)
+                                                }} />
+                                            )
+                                        })}
+    
+                                    </Filter>
+                                    <Filter>
+                                        <AmountContainer> 
+                                            <Amount onClick={() => handleQuantity('decrease')}>
+                                                <IoMdRemove style={{cursor: 'pointer'}} />
+                                            </Amount>
+                                            <Amount style={{textShadow: '1px 1px 2px grey'}}>{quantity}</Amount>
+                                            <Amount onClick={() => handleQuantity('increase')}>
+                                                <IoMdAdd style={{cursor: 'pointer'}} />
+                                            </Amount>
+                                        </AmountContainer>
+                                    </Filter>
+                                </FilterContainer>
+                                <ButtonContainer>
+                                    <SizeTitleMobile>
                                         SELECCIONA UN TAMAÑO
-                                    </FilterSizeButton>
-                                    {product.size !== undefined && product.size.map((s, index) => {
-                                        return (
-                                            <FilterSizeButton key={index} value={s}>
-                                                {s}
-                                            </FilterSizeButton>
-                                        )
-                                    })}
-                                </SizeButton>
-                                <SizeButtonMobile>
-                                    {product.size !== undefined && product.size.map((s, index) => {
-                                        return (
-                                            <FilterSizeButtonMobile key={index} value={s} onClick={(event) => {
-                                                handleSize(s)
-                                                handleSizeClassListRef(sizeRef)
-                                                handleSizeRef(event)
-                                                handleSizeClassListRef(sizeRef)
-                                            }}>
-                                                {s}
-                                            </FilterSizeButtonMobile>
-                                        )
-                                        // return (
-                                        //     <FilterColor color={'#' + c} key={index} onClick={(event) => {
-                                        //         handleColor(c)
-                                        //         handleToggleClassListRef(ref)
-                                        //         handleRefEvent(event)
-                                        //         handleToggleClassListRef(ref)
-                                        //     }} />
-                                        // )
-                                    })}
-                                </SizeButtonMobile>
-                            </ButtonContainer>
-                            <CartButton onClick={handleClick}>AÑADIR AL CARRITO</CartButton>
-                        </Info>
-                    </InfoContainer>
-                </Wrapper>
-            </Container>
-            <Carousel categories={product.categories} />
-            <Newsletter />
+                                    </SizeTitleMobile>
+                                    <SizeButton defaultValue={size} onClick={(s) => setSize(s.target.value)}>
+                                        <FilterSizeButton value='' hidden>
+                                            SELECCIONA UN TAMAÑO
+                                        </FilterSizeButton>
+                                        {product.size !== undefined && product.size.map((s, index) => {
+                                            return (
+                                                <FilterSizeButton key={index} value={s}>
+                                                    {s}
+                                                </FilterSizeButton>
+                                            )
+                                        })}
+                                    </SizeButton>
+                                    <SizeButtonMobile>
+                                        {product.size !== undefined && product.size.map((s, index) => {
+                                            return (
+                                                <FilterSizeButtonMobile key={index} value={s} onClick={(event) => {
+                                                    handleSize(s)
+                                                    handleSizeClassListRef(sizeRef)
+                                                    handleSizeRef(event)
+                                                    handleSizeClassListRef(sizeRef)
+                                                }}>
+                                                    {s}
+                                                </FilterSizeButtonMobile>
+                                            )
+                                            // return (
+                                            //     <FilterColor color={'#' + c} key={index} onClick={(event) => {
+                                            //         handleColor(c)
+                                            //         handleToggleClassListRef(ref)
+                                            //         handleRefEvent(event)
+                                            //         handleToggleClassListRef(ref)
+                                            //     }} />
+                                            // )
+                                        })}
+                                    </SizeButtonMobile>
+                                </ButtonContainer>
+                                <CartButton onClick={handleClick}>AÑADIR AL CARRITO</CartButton>
+                            </Info>
+                        </InfoContainer>
+                    </Wrapper>
+                </Container>
+                <Carousel categories={product.categories} />
+            </MainContainer>
             <Footer />
-        </MainContainer>
+        </Fragment>
     )
 }
 

@@ -10,7 +10,7 @@ import { ExpandMore } from '@material-ui/icons'
 import { styled as styles } from '@mui/material/styles';
 import { GoLaw } from 'react-icons/go'
 import { IoPeopleOutline } from 'react-icons/io5'
-import { VscTools} from 'react-icons/vsc'
+import { VscTools } from 'react-icons/vsc'
 
 // Components
 

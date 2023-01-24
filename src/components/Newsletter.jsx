@@ -8,16 +8,16 @@ import { useSelector } from 'react-redux'
 
 const Container = styled.div`
     height: auto;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 80px;
-    border-radius: 30px;
-    background: #fff;
+    padding: 80px;
+    transition: all 0.3s ease-in-out;
 
     @media only screen and (max-width: 950px) {
-        margin: 21px;
+        padding: 44px 25px;
     }
 `
 
@@ -27,11 +27,12 @@ const Wrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    background-color: #ECECEC;
+    background: rgb(168,168,168);
+    background: linear-gradient(90deg, rgba(168,168,168,1) 0%, rgba(236,236,236,1) 25%, rgba(248,248,248,1) 50%, rgba(236,236,236,1) 75%, rgba(168,168,168,1) 100%);
+    box-shadow: 5px 5px 50px 5px grey inset;
     margin: 0 80px;
     padding: 35px 0;
-    border-radius: 30px;
-    box-shadow: 1px 1px 8px 4px silver;
+    border-radius: 20px;
     transition: all 0.5s ease-in-out;
 `
 
@@ -102,7 +103,7 @@ const InputContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #fff;
+    background-color: #f8f8f8;
     border-radius: 50px;
     border: 1px solid #0d0d0d;
 

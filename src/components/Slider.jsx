@@ -6,12 +6,17 @@ import { KeyboardArrowRight, KeyboardArrowLeft } from "@material-ui/icons"
 
 // Components
 
-const Container = styled.div``
-
-const Cont = styled.div`
+const Container = styled.div`
     width: 100%;
     justify-content: center;
     padding-top: 80px;
+    padding-bottom: 20px;
+    transition: all 0.3s ease-in-out;
+
+    @media only screen and (max-width: 950px) {
+        margin-bottom: -20px;
+        padding-bottom: 0;
+    }
 `
 
 const TitleContainer = styled.div`
@@ -27,6 +32,7 @@ const TitleContainer = styled.div`
     background: #0d0d0d;
     color: whitesmoke;
     border-radius: 50px;
+    transition: all 0.3s ease-in-out;
 
     @media only screen and (max-width: 950px) {
         margin-left: 24px;
@@ -42,6 +48,7 @@ const TitleMenu = styled.h1`
     align-items: center;
     justify-content: center;
     letter-spacing: 0.2vw;
+    transition: all 0.3s ease-in-out;
 
     @media only screen and (max-width: 950px) {
         font-size: 1em;
@@ -55,12 +62,10 @@ const TitleMenu = styled.h1`
 const SliderContainer = styled.div`
     position: relative;
     margin: 0 80px;
-    margin-bottom: 80px;
     transition: all 0.3s ease-in-out;
 
     @media only screen and (max-width: 950px) {
         margin: 0 20px;
-        margin-bottom: 80px;
     }
 `
 
@@ -81,7 +86,7 @@ const Arrow = styled.div`
     margin: auto 0;
     cursor: pointer;
     z-index: 2;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
         background-color: #0d0d0d;
@@ -243,7 +248,6 @@ const Slider = () => {
 
     return (
         <Container id='announcement'>
-            <Cont>
             <TitleContainer>
                 <TitleMenu>NOVEDADES</TitleMenu>
             </TitleContainer>
@@ -279,7 +283,6 @@ const Slider = () => {
                     <KeyboardArrowRight style={{fontSize: '20px'}} />
                 </Arrow>
             </SliderContainer>
-            </Cont>
         </Container>
     )
 }

@@ -426,7 +426,8 @@ const Register = () => {
 
     useEffect(()=>{
         dispatch(reset())
-        document.getElementById('username').focus()
+        // document.getElementById('username').focus()
+
         if (error) {
             setNotifyMes('El nombre de usuario ingresado ya existe. Vuelve a intentarlo ingresando uno nuevo')
             setNotifyType('error')

@@ -571,7 +571,7 @@ const Nav = ({ toggle }) => {
                                 </Badge>
                             </ThemeProvider>
                         </NavCartLink>
-                        <NavCartLink to='/cart' type='cart'>
+                        <NavCartLink to='/cart' type='cart' onClick={toggleHome}>
                             <ThemeProvider theme={theme}>
                                 <Badge badgeContent={cartQuantity} color='success' overlap='rectangular' variant='dot'>
                                     <ShoppingCart style={{fontSize: '20px'}} />

@@ -351,7 +351,7 @@ const Login = () => {
 
     useEffect(()=>{
         dispatch(reset());
-        document.getElementById('username').focus();
+        // document.getElementById('username').focus();
 
         if (error) {
             setNotifyMes('El nombre de usuario y/o contraseña es incorrecto. Vuelve a ingresar sus datos correctamente');

@@ -12,15 +12,15 @@ import CarouselItem from "./CarouselItem"
 const Container = styled.div`
     width: 100%;
     height: 100%;
-    padding: 0 80px;
-    padding-right: 86px;
-    margin-top: 70px;
+    padding: 60px 80px;
+    padding-right: 87px;
     display: flex;
     flex-direction: column;
     transition: all 0.5s ease-in-out;
 
     @media only screen and (max-width: 950px) {
-        padding: 0 20px;
+        padding: 20px;
+        padding-bottom: 32px;
         overflow: hidden;
     }
 `
@@ -68,10 +68,6 @@ const SliderWrapper = styled.div`
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     box-shadow: 1px 1px 10px 1px #dcdcdc;
-
-    @media only screen and (max-width: 950px) {
-        margin-bottom: 70px;
-    }
 `
 
 const ArrowButton = styled.span`

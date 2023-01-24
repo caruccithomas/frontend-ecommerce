@@ -10,6 +10,11 @@ import Pagination from '@mui/material/Pagination';
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  // padding-bottom: 80px;
+
+  // @media only screen and (max-width: 950px) {
+  //   padding-bottom: 45px;
+  // }
 `
 
 const Wrapper = styled.div`
@@ -35,7 +40,6 @@ const NoProduct = styled.div`
   padding: 10px;
   margin: 10px;
   background: transparent;
-  // box-shadow: 2px 1px 10px 2px lightgrey;
   border: 2px solid #0d0d0d;
   border-radius: 25px;
   transition: all 0.5s ease-in-out;
@@ -50,6 +54,7 @@ const NoProductText = styled.h2`
   font-weight: 600;
   color: #000;
   letter-spacing: 1px;
+  transition: all 0.5s ease-in-out;
 
   @media screen and (max-width: 400px) {
     font-size: 12px;
@@ -79,7 +84,6 @@ const PaginationContainer = styled.div`
 // Products
 
 const Products = ({ categories, filters, sort }) => {
-  // console.log(categories, filters, sort);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [page, setPage] = useState(1);
@@ -106,7 +110,6 @@ const Products = ({ categories, filters, sort }) => {
             ? `/products?categories=${categories}`
             : `/products`
         );
-        // console.log(res);
         setProducts(res.data);
         setTotalPage(Math.ceil(res.data.length / rowPerPage))
       } catch (err) {

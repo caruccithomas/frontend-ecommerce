@@ -5,6 +5,8 @@ import { TbAdjustmentsHorizontal } from 'react-icons/tb'
 import { CgArrowsExchangeAltV } from 'react-icons/cg'
 import Products from '../components/Products'
 
+// Styles
+
 const Content = styled.div``
 
 const Container = styled.div`
@@ -219,9 +221,7 @@ const Option = styled.option`
 
 const NavFilters = () => {
     const location = useLocation();
-    // console.log(location);
     const categories = location.pathname.split('/')[2];
-    // console.log(categories);
     const currentPage = window.location.href.split('/')[3];
     const [sort, setSort] = useState('newest');
     const [filters, setFilters] = useState({});
@@ -234,8 +234,6 @@ const NavFilters = () => {
             // [e.target.name]: value.tolowercase() => For Filter Edits / Save filters in lowercase from DB
         });
     };
-    
-    // console.log(filters);
 
     return (
         <Content id='products'>
