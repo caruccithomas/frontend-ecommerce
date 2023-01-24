@@ -145,9 +145,9 @@ const Success = () => {
 
   return (
     <Fragment>
-      <Navbar />
+      <ScrollToTop />
       <Container>
-        <ScrollToTop />
+        <Navbar />
         {orderId && (
           <Wrapper>
             <Icon type='check'>
