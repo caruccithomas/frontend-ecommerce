@@ -31,11 +31,11 @@ const TitleWrapper = styled.div`
     justify-content: center;
     box-sizing: border-box;
     box-shadow: 1px 1px 12px 1px lightgrey;
-    text-shadow: 1px 4px 4px grey;
+    text-shadow: 1px 2px 2px grey;
     padding: 12px;
     width: 100%;
     background: #01bf74;
-    color: whitesmoke;
+    color: #0d0d0d;
     border: none;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
