@@ -34,7 +34,7 @@ const TitleWrapper = styled.div`
     padding: 12px;
     width: 100%;
     background: #01bf74;
-    color: #0d0d0d;
+    color: #000;
     border: none;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
