@@ -31,7 +31,6 @@ const TitleWrapper = styled.div`
     justify-content: center;
     box-sizing: border-box;
     box-shadow: 1px 1px 12px 1px lightgrey;
-    text-shadow: 1px 2px 2px grey;
     padding: 12px;
     width: 100%;
     background: #01bf74;
@@ -76,7 +75,7 @@ const ArrowButton = styled.span`
     border-radius: 50px;
     background-color: #01bf74;
     box-shadow: 1px 2px 4px 2px lightgrey;
-    color: #fff;
+    color: #000;
     display: flex;
     position: absolute;
     align-items: center;
